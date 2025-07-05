@@ -1,0 +1,132 @@
+@import "tailwindcss";
+/* @import "../styles/style.css";
+@import "../styles/tabler-icons.min.css"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --highlight: #FFC107;
+  --black: #171717;
+  --blue: #0554F2;
+  --dark-blue: #063573;
+  --white: #ffffff;
+  --white-2: #f2f2f2;
+  --cyan: #04BF7B;
+  --dark-orange: #BF5315;
+  --orange: #D9601A;
+  --dark-cyan: #0E7C54;
+  --gray: #919191;
+  --dark-gray: #98b3a99d;
+}
+
+body {
+  background: var(--white);
+  font-family: var(--font-poppins);
+  overflow-x: hidden;
+} 
+
+@media (min-width: 768px) {
+  .menu-icon-hidden {
+    display: none !important;
+  }
+}
+.text-blue{
+  color: var(--blue);
+}
+.text-dark-blue{
+  color: var(--dark-blue);
+}
+.text-black{
+  color: var(--black);
+}
+.text-white{
+  color: var(--white);
+}
+.text-white-2{
+  color: var(--white-2);
+}
+.text-cyan{
+  color: var(--cyan);
+}
+.text-orange{
+  color: var(--orange)
+}
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-dark-blue {
+  background-color: var(--dark-blue);
+}
+.bg-black {
+  background-color: var(--black);
+}
+.bg-white {
+  background-color: var(--white);
+}
+.bg-white-2 {
+  background-color: var(--white-2);
+}
+.bg-cyan {
+  background-color: var(--cyan);
+}
+.bg-dark-orange {
+  background-color: var(--dark-orange);
+}
+.bg-orange {
+  background-color: var(--orange);
+}
+.button-blue{
+  background-color: var(--blue);
+  transition: background-color 0.3s ease;
+}
+.button-blue:hover{
+  background-color: var(--dark-blue);
+}
+.button-orange{
+  background-color: var(--orange);
+  color: var(--white);
+  transition: background-color 0.3s ease;
+}
+.button-orange:hover {
+  background-color: var(--dark-orange);
+}
+.button-cyan{
+  background-color: var(--cyan);
+  color: var(--white);
+  transition: background-color 0.3s ease;
+}
+.button-cyan:hover {
+  background-color: var(--dark-cyan);
+}
+.button-gray{
+  background-color: var(--gray);
+  color: var(--white);
+  transition: background-color 0.3 ease;
+}
+.button-gray:hover{
+  background-color: var(--dark-gray);
+}
+.border-gray{
+  border-color: var(--white-2);
+}
+.white-to-gray{
+  background-color: var(--white);
+  transition: background-color 0.3s ease;
+}
+.white-to-gray:hover {
+  background-color: var(--white-2);
+}
+.card-white-to-gray{
+  stroke: var(--white-2);
+}
+.border-form-input{
+  border-color: var(--white-2);
+}
+.border-form-input:focus{
+  border-color: var(--dark-blue);
+}
+.highlight{
+  background-color: var(--highlight);
+}

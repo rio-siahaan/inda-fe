@@ -74,17 +74,17 @@ export async function convertJsonToCsvAndSave(
     const var_label = jsonContent?.var?.[0]?.label || "-";
 
     const turvar_labels: Record<string, string> = {};
-    jsonContent.turvar?.forEach((item: any) => {
+    jsonContent.turvar?.forEach((item: {val: string, label: string}) => {
       turvar_labels[item.val] = item.label.replace("Tidak ada", "-");
     });
 
     const vervar_labels: Record<string, string> = {};
-    jsonContent.vervar?.forEach((item: any) => {
+    jsonContent.vervar?.forEach((item: {val: string, label: string}) => {
       vervar_labels[item.val] = item.label.replace("Tidak ada", "-");
     });
 
     const tahun_labels: Record<string, string> = {};
-    jsonContent.tahun?.forEach((item: any) => {
+    jsonContent.tahun?.forEach((item: {val: string, label: string}) => {
       tahun_labels[item.val] = item.label.replace("Tidak ada", "-");
     });
 
@@ -93,7 +93,7 @@ export async function convertJsonToCsvAndSave(
     const vervar_keys = Object.keys(vervar_labels).sort(
       (a, b) => b.length - a.length
     );
-    const var_keys = jsonContent.var?.map((v: any) => v.val.toString()) || [];
+    const var_keys = jsonContent.var?.map((v: {val: string}) => v.val.toString()) || [];
     const turvar_keys = Object.keys(turvar_labels).sort(
       (a, b) => b.length - a.length
     );

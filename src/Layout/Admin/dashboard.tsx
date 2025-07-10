@@ -12,7 +12,7 @@ import ResponsePerDayGemini from "@/component/Admin/ResponsePerDayGemini";
 import ResponsePerDayLlama from "@/component/Admin/ResponsePerDayLlama";
 
 export default function DashboardLayout() {
-  const { dark } = useDarkMode();
+  const { dark } = useDarkMode() ?? {};
   const [totalUser, setTotalUser] = useState<{
     totalUsers: number;
     selisihUserPerMonth: number;

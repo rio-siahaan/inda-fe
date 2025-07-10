@@ -16,7 +16,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ message: "Password berhasil diubah." });
-  } catch () {
+  } catch (error) {
+    console.log(error)
     return NextResponse.json({ message: "Token tidak valid atau kadaluarsa." }, { status: 400 });
   }
 }

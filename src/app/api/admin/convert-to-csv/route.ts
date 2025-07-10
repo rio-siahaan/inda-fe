@@ -1,10 +1,8 @@
-// app/api/convert-to-csv/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { convertJsonToCsvAndSave } from "@/lib/convert-to-csv";
 
 export async function POST(req: NextRequest) {
   try {
-    
     const formData = await req.formData();
     const files = formData.getAll("files") as File[];
 

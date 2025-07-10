@@ -20,7 +20,7 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const userRole = session?.user?.role;
+  const [userRole, setUserRole] = useState()
   const userImage = session?.user?.image;
 
   //  buat responsif
@@ -62,6 +62,16 @@ export default function Navbar() {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMenuOpen]);
+
+  const getRole = async () => {
+    try {
+      const res = await fetch(`/api/getProfile?email=${session?.user?.email}`);
+      const {role} = await res.json()
+      if(role) setUserRole(role)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>

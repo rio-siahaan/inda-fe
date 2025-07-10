@@ -38,7 +38,14 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Password salah");
         }
 
-        return user;
+        return {
+          name: user.name,
+          email: user.email,
+          id: user.id,
+          role: user.role,
+          image: user.image,
+          personifikasi: user.personifikasi
+        };
       },
     }),
     GoogleProvider({

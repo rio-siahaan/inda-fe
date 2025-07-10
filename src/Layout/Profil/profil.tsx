@@ -15,12 +15,16 @@ export default function ProfilLayout() {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
-  const router = useRouter()
+  const router = useRouter();
 
   // Sync initial value from session once available
   useEffect(() => {
     if (session?.user?.name) setName(session.user.name);
-    if (session?.user?.personifikasi) setPersona(session.user.personifikasi);
+    if (session?.user?.personifikasi) {
+      setPersona(session.user.personifikasi);
+    } else {
+      setPersona("");
+    }
   }, [session]);
 
   useEffect(() => {
@@ -40,21 +44,21 @@ export default function ProfilLayout() {
         body: JSON.stringify({
           name,
           personifikasi: persona,
-          email: email_user
+          email: email_user,
         }),
       });
-      router.refresh()
+      router.refresh();
       if (!res.ok) {
         console.log("Status respons tidak ok karena ", res.status);
-      }else{
-        await update({name, personifikasi: persona})
-        setSuccess(true)
+      } else {
+        await update({ name, personifikasi: persona });
+        setSuccess(true);
       }
     } catch (error) {
       console.log("Terjadi eror: ", error);
       setError(true);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,9 +85,7 @@ export default function ProfilLayout() {
       )}
       {success && (
         <div className="bg-green-300 p-2 mb-2">
-          <p>
-            Sukses mengganti profil.
-          </p>
+          <p>Sukses mengganti profil.</p>
         </div>
       )}
       <form className="space-y-6" onSubmit={handleSubmit}>
@@ -148,7 +150,7 @@ export default function ProfilLayout() {
             type="submit"
             className="button-cyan p-2 cursor-pointer rounded-lg"
           >
-            {loading ? <LoadingOutlined/> : "Ubah Profil"}
+            {loading ? <LoadingOutlined /> : "Ubah Profil"}
           </button>
         </div>
       </form>

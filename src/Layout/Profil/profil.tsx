@@ -16,23 +16,31 @@ export default function ProfilLayout() {
   const [success, setSuccess] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const email_user = session?.user?.email;
+  const gambar_user = session?.user?.image;
 
-  // Sync initial value from session once available
   useEffect(() => {
-    if (session?.user?.name) setName(session.user.name);
-    if (session?.user?.personifikasi) {
-      setPersona(session.user.personifikasi);
-    } else {
-      setPersona("");
-    }
-  }, [session]);
+    getProfile()
+  }, [])
 
   useEffect(() => {
     nameRef.current?.focus();
   }, []);
 
-  const email_user = session?.user?.email;
-  const gambar_user = session?.user?.image;
+  const getProfile = async () => {
+    try {
+      const profilUser = await fetch(`/api/getProfile?email=${email_user}`)
+      const {name, personifikasi} = await profilUser.json()
+
+      if (name && personifikasi){
+        setName(name)
+        setPersona(personifikasi)
+      }
+    } catch (error) {
+      console.log(error)
+      setError(true)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

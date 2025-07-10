@@ -1,4 +1,4 @@
-import NextAuth, {NextAuthOptions} from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -28,6 +28,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email atau password salah");
         }
 
+        if (!user.password) {
+          throw new Error("Password tidak tersedia untuk akun ini");
+        }
+
         // dikomen untuk demo saja
         const isValid = await bcrypt.compare(
           credentials.password,
@@ -51,7 +55,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.given_name,
           email: profile.email,
           image: profile.picture,
-          personifikasi: null
+          personifikasi: null,
         };
       },
     }),
@@ -90,19 +94,20 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
       }
       if ("id" in token) {
-        session.user.id = token.id;
+        session.user.id = typeof token.id === 'string' ? token.id : null;
       }
       if ("name" in token) {
         session.user.name = token.name;
       }
       if ("role" in token) {
-        session.user.role = token.role || "user";
+        session.user.role = typeof token.role === 'string' ? token.role || "user" : null;
       }
       if ("image" in token) {
         session.user.image = (token.image as string) || "/avatar-2.jpg";
       }
       if ("personifikasi" in token) {
-        session.user.personifikasi = token.personifikasi;
+        // session.user.personifikasi = token.personifikasi;
+        session.user.personifikasi = typeof token.personifikasi === "string" ? token.personifikasi : null;
       }
       return session;
     },

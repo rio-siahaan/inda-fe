@@ -32,8 +32,6 @@ export async function countFile() {
     return {count: thisMonthCount, selisih}
   } catch (error) {
     console.error("Gagal menghitung file:", error);
-    return new Response(
-      JSON.stringify({ error: "Gagal menghitung file", status: 500 })
-    );
+    throw new Error("Gagal menghitung file")
   }
 }

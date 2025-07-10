@@ -38,14 +38,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Password salah");
         }
 
-        return {
-          name: user.name,
-          email: user.email,
-          id: user.id,
-          role: user.role,
-          image: user.image,
-          personifikasi: user.personifikasi
-        };
+        return user;
       },
     }),
     GoogleProvider({
@@ -58,6 +51,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.given_name,
           email: profile.email,
           image: profile.picture,
+          personifikasi: null
         };
       },
     }),
@@ -86,7 +80,7 @@ export const authOptions: NextAuthOptions = {
           token.email = user.email;
           token.name = user.name;
           token.image = user.image;
-          token.personifikasi = null;
+          token.personifikasi = user.personifikasi;
         }
       }
       return token;

@@ -3,6 +3,16 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "./prisma";
 
+type LabelItem = { val: string; label: string };
+type JsonContentType = {
+  subject?: LabelItem[];
+  var?: LabelItem[];
+  turvar?: LabelItem[];
+  vervar?: LabelItem[];
+  tahun?: LabelItem[];
+  datacontent: Record<string, string | number | null>;
+};
+
 // Fungsi untuk mengekstrak ID berdasarkan struktur kunci
 function extract_ids(
   key: string,
@@ -47,12 +57,12 @@ async function save_to_db(filename: string) {
 
     return { status: 200 };
   } catch (error) {
-    throw new Error("Gagal memasukkan nama file ke basis data")
+    throw new Error(`Gagal memasukkan nama file ke basis data ${error}`)
   }
 }
 
 export async function convertJsonToCsvAndSave(
-  jsonContent: any,
+  jsonContent: JsonContentType,
   originalName?: string
 ): Promise<{ filename: string; filePath: string; success: boolean }> {
   try {
@@ -133,7 +143,7 @@ export async function convertJsonToCsvAndSave(
 
     await fs.writeFile(filePath, csvContent, "utf-8");
 
-    save_to_db(filename);
+    await save_to_db(filename);
 
     return { filename, filePath, success: true };
   } catch (err) {

@@ -46,6 +46,6 @@ export async function countMessages() {
     const totalMessages = messages.length || 0
     return {totalMessages, selisihMessagesPerMonth};
   } catch (error) {
-    throw new Error("Gagal menghitung jumlah Messages");
+    throw new Error(`Gagal menghitung jumlah Messages karena ${error}`);
   }
 }

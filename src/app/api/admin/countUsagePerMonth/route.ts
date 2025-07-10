@@ -7,6 +7,6 @@ export async function POST() {
 
     return new Response(JSON.stringify({usage : usage}))
   } catch (error) {
-    throw new Error("Gagal mendapatkan penggunaan bulanan");
+    throw new Error(`Gagal mendapatkan penggunaan bulanan ${error}`);
   }
 }

@@ -2,7 +2,12 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const DarkModeContext = createContext<any>(null);
+type DarkModeContextType = {
+  dark: boolean;
+  setDark: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined);
 
 export const DarkModeProvider = ({ children }: { children: React.ReactNode }) => {
   const [dark, setDark] = useState(false);

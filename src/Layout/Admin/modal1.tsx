@@ -6,6 +6,12 @@ type ModalSatuProps = {
   setCsvFiles: (files: { name: string; url: string }[]) => void;
 };
 
+type ResultItem = {
+  success: boolean;
+  filename: string;
+};
+
+
 export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
   const [loading, setLoading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -61,11 +67,12 @@ export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
 
     if (!res.ok) throw new Error("Gagal mengonversi");
 
-    const { results } = await res.json(); // ✅ hanya panggil json() satu kali
+    // const { results } = await res.json(); // ✅ hanya panggil json() satu kali
+    const { results } : {results: ResultItem[]} = await res.json()
 
     const files = results
-      .filter((r: any) => r.success)
-      .map((r: any) => ({
+      .filter((r) => r.success)
+      .map((r) => ({
         name: r.filename,
         url: `api/tmp-file?name=${r.filename}`, // 💡 atau sesuaikan jika dari GitHub
       }));

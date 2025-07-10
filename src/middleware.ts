@@ -1,9 +1,9 @@
 import withAuth from "./app/middlewares/withAuth";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const authRoutes = ["/dashboard", "/editfail", "/inda"];
 
-export function mainMiddleware(req: NextRequest) {
+export function mainMiddleware() {
   const res = NextResponse.next();
   return res;
 }

@@ -1,5 +1,4 @@
 import { countMessages } from "@/lib/countMessages";
-import { NextRequest } from "next/server";
 
 export async function POST(){
     try{

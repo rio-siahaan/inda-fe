@@ -93,3 +93,9 @@ model Usages {
   outputToken     Int
   timestamp       DateTime @default(now())
 }
+
+model Files {
+  id              String @id @default(cuid())
+  name            String
+  created_at      DateTime @default(now())
+}

@@ -96,7 +96,7 @@ export default function DashboardLayout() {
   };
 
   return (
-    <div className={`${dark ? "bg-gray-800" : "bg-white-2"} px-4 py-2`}>
+    <div className={`${dark ? "bg-gray-800" : "bg-white-2"} px-4 py-2 min-h-screen`}>
       {error && `Terjadi eror : ${error}`}
       <div className="grid grid-cols-12 gap-4 ">
         <div className="col-span-4 h-50 md:h-30">

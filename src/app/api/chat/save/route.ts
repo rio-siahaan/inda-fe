@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     return new Response("Missing parameters", { status: 400 })
   }
 
-  const fastApiUrl = process.env.FAST_API_URL
+  const fastApiUrl = process.env.NEXT_PUBLIC_FAST_API_URL
 
   //mulai track waktu respon
   const startTrack = Date.now()

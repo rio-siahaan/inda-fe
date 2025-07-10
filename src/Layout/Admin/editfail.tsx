@@ -2,7 +2,6 @@
 
 import TabelData from "@/component/Admin/TabelData";
 import { useDarkMode } from "@/lib/context/DarkModeContext";
-import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 
 export default function EditFailLayout() {
@@ -13,7 +12,7 @@ export default function EditFailLayout() {
   const [error, setError] = useState("");
   const [proses, setProses] = useState(0);
   const [tahap, setTahap] = useState(0);
-  const [json, setJson] = useState<any[]>([]);
+  
   useEffect(() => {
     inputRef.current?.focus();
   }, []);

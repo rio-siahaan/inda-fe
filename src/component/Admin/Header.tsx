@@ -26,7 +26,7 @@ export default function Header({ sidebar, setSidebar }: HeaderProps) {
     <>
       <nav
         className={`flex justify-between px-5 py-2 sticky top-0 z-50 items-center ${
-          dark ? "bg-dark-blue text-white" : "bg-white text-dark"
+          dark ? "bg-gray-800 text-white" : "bg-white text-dark"
         }`}
       >
         <button

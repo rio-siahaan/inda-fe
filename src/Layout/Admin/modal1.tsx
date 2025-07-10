@@ -30,7 +30,7 @@ export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
     try {
       setJsonFiles((prev) => [...prev, file]);
     } catch (e) {
-      alert(`File ${file.name} tidak valid JSON.`);
+      alert(`File ${file.name} tidak valid JSON karena ${e}.`);
     }
   };
 
@@ -43,46 +43,42 @@ export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
   };
 
   const handleUpload = async () => {
-    setLoading(true);
-    if (jsonFiles.length === 0) {
-      alert("Belum ada file yang dipilih.");
-      return;
-    }
+  setLoading(true);
+  if (jsonFiles.length === 0) {
+    alert("Belum ada file yang dipilih.");
+    setLoading(false)
+    return;
+  }
 
-    const formData = new FormData();
-    jsonFiles.forEach((file) => formData.append("files", file));
+  const formData = new FormData();
+  jsonFiles.forEach((file) => formData.append("files", file));
 
-    try {
-      const res = await fetch(`/api/convert-to-csv/`, {
-        method: "POST",
-        body: formData,
-      });
+  try {
+    const res = await fetch(`/api/convert-to-csv/`, {
+      method: "POST",
+      body: formData,
+    });
 
-      if (!res.ok) throw new Error("Gagal mengonversi");
+    if (!res.ok) throw new Error("Gagal mengonversi");
 
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "converted.csv";
-      link.click();
-      setLoading(false);
+    const { results } = await res.json(); // ✅ hanya panggil json() satu kali
 
-      const { results } = await res.json();
-      const files = results
-        .filter((r: any) => r.success)
-        .map((r: any) => ({
-          name: r.filename,
-          url: `/csv_output/${r.filename}`,
-        }));
+    const files = results
+      .filter((r: any) => r.success)
+      .map((r: any) => ({
+        name: r.filename,
+        url: `api/tmp-file?name=${r.filename}`, // 💡 atau sesuaikan jika dari GitHub
+      }));
 
-      setCsvFiles(files);
-      setStatus(2);
-    } catch (err) {
-      alert("Terjadi kesalahan saat konversi");
-      setLoading(false);
-    }
-  };
+    setCsvFiles(files);
+    setStatus(2);
+  } catch (err) {
+    alert(`Terjadi kesalahan saat konversi karena ${err}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -128,7 +124,7 @@ export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
       {jsonFiles.length > 0 && (
         <div className="mt-5 text-sm text-left max-h-64 overflow-y-auto bg-gray-100 p-4 rounded">
           <p className="font-bold mb-2 text-black">Pratinjau JSON:</p>
-          {jsonFiles.map((file, idx) => (
+          {jsonFiles.map((file) => (
             <div key={file.name} className="mb-3">
               <p className="font-semibold text-blue-700">{file.name}</p>
             </div>

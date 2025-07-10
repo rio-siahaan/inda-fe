@@ -140,6 +140,7 @@ export default function NewEditFailLayout() {
             {/* isi modal status 2 */}
             {status == 2 && (
               <ModalDua
+                setModal={setModal}
                 setStatus={setStatus}
                 csvFiles={csvFiles}
               />

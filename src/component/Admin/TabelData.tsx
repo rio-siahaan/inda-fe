@@ -5,8 +5,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 
 type FileInfo = {
-  filename: string;
-  waktu_masuk: string;
+  name: string;
+  created_at: string;
 };
 
 export default function TabelData() {
@@ -79,7 +79,7 @@ export default function TabelData() {
                         </tr>
                       ) : files.length > 0 ? (
                         files.map((item) => (
-                          <tr key={item.filename}>
+                          <tr key={item.name}>
                             <td
                               className={`align-top px-6 py-4 text-sm font-medium text-gray-800 ${
                                 dark ? "text-white" : "text-black"
@@ -87,9 +87,9 @@ export default function TabelData() {
                             >
                               <div
                                 className="w-[250px] truncate overflow-hidden whitespace-nowrap"
-                                title={item.filename}
+                                title={item.name}
                               >
-                                {item.filename}
+                                {item.name}
                               </div>
                             </td>
 
@@ -98,7 +98,7 @@ export default function TabelData() {
                                 dark ? "text-white" : "text-black"
                               }`}
                             >
-                              {item.waktu_masuk}
+                              {item.created_at}
                             </td>
                           </tr>
                         ))
@@ -121,12 +121,6 @@ export default function TabelData() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-between">
-        <p className="text-sm">
-          dibaharui oleh : <span className="italic">"nama"</span>
-        </p>
-        <p className="text-sm">19-05-2020</p>
       </div>
     </div>
   );

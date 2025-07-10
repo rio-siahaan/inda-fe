@@ -1,48 +1,40 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { prisma } from "@/lib/prisma";
 
 export async function countFile() {
   try {
-    const baseDir = path.join(process.cwd(), "data");
+    const now = new Date();
+    const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const endOfLastMonth = new Date(startOfThisMonth.getTime() - 1); // sehari sebelum bulan ini
 
-    // Baca semua folder tanggal (YYYY-MM-DD)
-    const folders = await fs.promises.readdir(baseDir);
+    // 🔹 File bulan ini
+    const thisMonthCount = await prisma.files.count({
+      where: {
+        created_at: {
+          gte: startOfThisMonth,
+          lte: now,
+        },
+      },
+    });
 
-    // Cari folder terbaru berdasarkan nama folder (tanggal)
-    const latestFolder = folders
-      .filter(f => /^\d{4}-\d{2}-\d{2}$/.test(f))
-      .sort()
-      .reverse()[0];
+    // 🔹 File bulan lalu
+    const lastMonthCount = await prisma.files.count({
+      where: {
+        created_at: {
+          gte: startOfLastMonth,
+          lte: endOfLastMonth,
+        },
+      },
+    });
 
-    if (!latestFolder) {
-    return { currentCount: 0, selisih: 0 };
-    }
+    const selisih = thisMonthCount - lastMonthCount;
 
-    const folderPath = path.join(baseDir, latestFolder);
-    const files = await fs.promises.readdir(folderPath);
-    const jsonFileCount = files.filter(f => f.endsWith(".json")).length || 0;
-
-    // Cari folder bulan lalu berdasarkan nama folder (tanggal)
-    const lastMonthFolder = folders
-      .filter(f => /^\d{4}-\d{2}-\d{2}$/.test(f))
-      .sort()
-      .reverse()[1];
-
-
-    if (!lastMonthFolder) {
-      return { currentCount: jsonFileCount, selisih: 0}
-    }
-
-    const lastMonthFolderPath = path.join(baseDir, lastMonthFolder)
-    const lastMonthFiles = await fs.promises.readdir(lastMonthFolderPath)
-    const lastMonthJsonFileCount = lastMonthFiles.filter(f => f.endsWith(".json")).length || 0
-
-    const selisihFiles = jsonFileCount - lastMonthJsonFileCount
-
-    return { currentCount: jsonFileCount, selisih: selisihFiles };
+    return {count: thisMonthCount, selisih}
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ count: 0, error: "Gagal membaca folder" });
+    console.error("Gagal menghitung file:", error);
+    return new Response(
+      JSON.stringify({ error: "Gagal menghitung file", status: 500 })
+    );
   }
 }

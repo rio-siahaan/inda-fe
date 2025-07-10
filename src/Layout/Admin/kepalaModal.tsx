@@ -1,41 +1,23 @@
-import { MinusOutlined } from "@ant-design/icons"
+import { MinusOutlined } from "@ant-design/icons";
 
-export default function KepalaModal({status}: {status: number}){
-    return(
-        <div className="flex justify-around items-center">
-              <p
-                className={`${status == 0 ? "bg-cyan" : ""} rounded-full p-1
+export default function KepalaModal({ status }: { status: number }) {
+  return (
+    <div className="flex justify-around items-center">
+      <p
+        className={`${status == 0 ? "bg-cyan" : ""} rounded-full p-1
                 }`}
-              >
-                1
-              </p>
-              <p>
-                <MinusOutlined />
-              </p>
-              <p className={`${status == 1 ? "bg-cyan" : ""} rounded-full p-1`}>
-                2
-              </p>
-              <p>
-                <MinusOutlined />
-              </p>
+      >
+        1
+      </p>
+      <p>
+        <MinusOutlined />
+      </p>
+      <p className={`${status == 1 ? "bg-cyan" : ""} rounded-full p-1`}>2</p>
+      <p>
+        <MinusOutlined />
+      </p>
 
-              <p className={`${status == 2 ? "bg-cyan" : ""} rounded-full p-1`}>
-                3
-              </p>
-              <p>
-                <MinusOutlined />
-              </p>
-
-              <p className={`${status == 3 ? "bg-cyan" : ""} rounded-full p-1`}>
-                4
-              </p>
-              <p>
-                <MinusOutlined />
-              </p>
-
-              <p className={`${status == 4 ? "bg-cyan" : ""} rounded-full p-1`}>
-                5
-              </p>
-            </div>
-    )
+      <p className={`${status == 2 ? "bg-cyan" : ""} rounded-full p-1`}>3</p>
+    </div>
+  );
 }

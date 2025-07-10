@@ -23,7 +23,7 @@ export default function Sidebar({ vision, setVision }: SidebarProps) {
   return (
     <aside
       className={`
-        ${dark ? "bg-dark-blue text-white" : "bg-white text-black"} 
+        ${dark ? "bg-gray-800 text-white" : "bg-white text-black"} 
         min-h-screen pt-5 pl-5 w-1/2 sm:w-1/5 md:w-1/5 
         fixed md:static 
         top-0 left-0 

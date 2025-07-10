@@ -94,7 +94,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
       }
       if ("id" in token) {
-        session.user.id = typeof token.id === 'string' ? token.id : null;
+        session.user.id = typeof token.id === 'string' ? token.id : undefined;
       }
       if ("name" in token) {
         session.user.name = token.name;

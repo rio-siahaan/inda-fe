@@ -24,7 +24,7 @@ type SidebarIndaProps = {
 export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   const { dark, setDark } = useDarkMode();
   const { data: session, update } = useSession();
-  const userId = session?.user?.id;
+  const [userId, setUserId] = useState()
   const userName = session?.user?.name;
   const userEmail = session?.user?.email;
   const userImage = session?.user?.image;
@@ -72,6 +72,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   //   fetchConversation();
   // }, [status, session]);
 
+
   useEffect(() => {
   const fetchPersonifikasi = async () => {
     if (!session?.user?.email) return;
@@ -82,6 +83,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
       if (res.ok) {
         setPersonifikasi(data.personifikasi || "");
+        setUserId(data.id || "")
       } else {
         console.error("Gagal ambil personifikasi:", data);
       }

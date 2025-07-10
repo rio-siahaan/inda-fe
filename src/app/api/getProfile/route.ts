@@ -12,14 +12,14 @@ export async function GET(req: NextRequest) {
   try {
     const user = await prisma.user.findUnique({
       where: { email },
-      select: { name: true, personifikasi: true },
+      select: { id: true, name: true, personifikasi: true },
     });
 
     if (!user) {
       return new Response("User tidak ditemukan", { status: 404 });
     }
 
-    return new Response(JSON.stringify({ name: user.name, personifikasi: user.personifikasi }), {
+    return new Response(JSON.stringify({ id: user.id, name: user.name, personifikasi: user.personifikasi }), {
       status: 200,
     });
   } catch (err) {

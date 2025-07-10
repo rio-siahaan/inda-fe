@@ -102,7 +102,7 @@ export const authOptions: NextAuthOptions = {
         session.user.image = (token.image as string) || "/avatar-2.jpg";
       }
       if ("personifikasi" in token) {
-        session.user.personifikasi = token.personifikasi || null;
+        session.user.personifikasi = token.personifikasi;
       }
       return session;
     },

@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function EmailConfirmationPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +27,7 @@ export default function EmailConfirmationPage() {
 
       setSuccess("Link reset telah dikirim ke email.");
     } catch (error) {
-      setError("Terjadi kesalahan.");
+      setError(`Terjadi kesalahan karena ${error}.`);
     }
   };
 

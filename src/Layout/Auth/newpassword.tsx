@@ -36,7 +36,7 @@ export default function NewPasswordPage() {
       setSuccess("Password berhasil diubah!");
       router.push("/login");
     } catch (error) {
-      setError("Terjadi kesalahan.");
+      setError(`Terjadi kesalahan ${error}.`);
     }
   };
 
@@ -60,7 +60,7 @@ export default function NewPasswordPage() {
               placeholder="Masukkan password baru Anda"
               className="border border-form-input rounded-lg px-4 py-2"
               value={newPass}
-              onChange={(e) => setConfirmPass(e.target.value)}
+              onChange={(e) => setNewPass(e.target.value)}
             />
 
             <label className="font-medium" htmlFor="confirm_new_password">

@@ -54,7 +54,7 @@ export default function ModalSatu({ setStatus, setCsvFiles }: ModalSatuProps) {
   jsonFiles.forEach((file) => formData.append("files", file));
 
   try {
-    const res = await fetch(`/api/convert-to-csv/`, {
+    const res = await fetch(`/api/admin/convert-to-csv/`, {
       method: "POST",
       body: formData,
     });

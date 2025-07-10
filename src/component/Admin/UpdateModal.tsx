@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function InputBatasVar(){
     const dark = useDarkMode()
-    const [status, setStatus] = useState<number>(1)
+    const [status, setStatus] = useState<number>()
     return(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div
@@ -11,7 +11,7 @@ export default function InputBatasVar(){
               dark ? "bg-gray-800 text-white" : "text-black"
             } rounded-lg p-6 w-[90%] max-w-md shadow-lg`}
           >
-            <h2 className="text-xl font-bold mb-4">Konfirmasi</h2>
+            <h2 className="text-xl font-bold mb-4">Konfirmasi {status}</h2>
             <p className="mb-6">
               Apakah Anda yakin ingin memperbaharui dokumen sekarang?
             </p>

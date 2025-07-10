@@ -63,6 +63,6 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.log(`Tidak dapat menghapus sesi chat ini dari user : ${userId}}`);
-    throw new Error("Terdapat eror saat menghapus sesi chat");
+    throw new Error(`Terdapat eror saat menghapus sesi chat ${error}`);
   }
 }

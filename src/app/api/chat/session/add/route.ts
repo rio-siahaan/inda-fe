@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    let conversation = await prisma.conversations.create({
+    const conversation = await prisma.conversations.create({
       data: {
         userId: userId,
         title: `Percakapan ${new Date().toLocaleString()}`,
@@ -22,9 +22,9 @@ export async function POST(req: NextRequest) {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (error) {
+  } catch (err) {
     return new Response(
-      JSON.stringify({ error: "Terjadi error saat menambahkan session chat" }),
+      JSON.stringify({ error: `Terjadi error saat menambahkan session chat ${err}` }),
       { status: 500 }
     );
   }

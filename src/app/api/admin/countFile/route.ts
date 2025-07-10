@@ -1,7 +1,6 @@
-import { NextRequest } from "next/server";
 import { countFile }  from "@/lib/countFile";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
     const {count, selisih} = await countFile()
     return new Response(
@@ -14,9 +13,9 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error) {
+  } catch (err) {
     return new Response(
-      JSON.stringify({ error: "Gagal menghitung jumlah user" }),
+      JSON.stringify({ error: `Gagal menghitung jumlah user karena ${err}` }),
       { status: 500, headers: { "Content-Type": "application/json" } }
     );
   }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { Readable } from "stream";
 
 export async function GET(req: NextRequest) {
   const name = req.nextUrl.searchParams.get("name");
@@ -14,6 +15,14 @@ export async function GET(req: NextRequest) {
     const stat = fs.statSync(filePath);
     const stream = fs.createReadStream(filePath);
 
+    const webStream = new ReadableStream({
+      start(controller) {
+        stream.on("data", (chunk) => controller.enqueue(chunk));
+        stream.on("end", () => controller.close());
+        stream.on("error", (err) => controller.error(err));
+      },
+    });
+
     // ❗Hapus file setelah stream selesai
     stream.on("close", () => {
       fs.unlink(filePath, (err) => {
@@ -25,7 +34,7 @@ export async function GET(req: NextRequest) {
       });
     });
 
-    return new NextResponse(stream as any, {
+    return new NextResponse(webStream, {
       status: 200,
       headers: {
         "Content-Type": "text/csv",
@@ -33,7 +42,7 @@ export async function GET(req: NextRequest) {
         "Content-Disposition": `inline; filename="${name}"`,
       },
     });
-  } catch (e) {
-    return new NextResponse("File not found", { status: 404 });
+  } catch (err) {
+    return new NextResponse(`File not found ${err}`, { status: 404 });
   }
 }

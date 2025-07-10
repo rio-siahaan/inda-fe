@@ -1,7 +1,7 @@
-import EditFailLayout from "@/Layout/Admin/editfail";
+import NewEditFailLayout from "@/Layout/Admin/neweditfail";
 
 export default function EditFail() {
   return (
-    <EditFailLayout/>
+    <NewEditFailLayout/>
   );
 }

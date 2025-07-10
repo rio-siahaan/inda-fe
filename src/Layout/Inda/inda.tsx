@@ -6,7 +6,7 @@ import NavbarInda from "@/component/User/Inda/Navbar";
 import ChatInda from "@/component/User/Inda/Chat";
 import { useDarkMode } from "@/lib/context/DarkModeContext";
 
-export default async function IndaPage() {
+export default function IndaPage() {
   const [sidebar, setSidebar] = useState(true);
   const {dark} = useDarkMode()
 

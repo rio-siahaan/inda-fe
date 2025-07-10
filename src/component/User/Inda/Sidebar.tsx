@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { useDarkMode } from "@/lib/context/DarkModeContext";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations } from "@/lib/hooks/useConversation";
 import Loading from "@/component/Loading";
@@ -117,6 +117,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
         setStatus("Sukses mengganti personifikasi");
       }
     } catch (error) {
+      console.log(error)
     } finally {
       setLoading(false);
     }

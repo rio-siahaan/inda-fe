@@ -6,8 +6,8 @@ export async function POST(){
         const res = await countResponseTimePerDayLlama()
         const {avgResponse} = await res.json()
         return new NextResponse(JSON.stringify({avgResponse: avgResponse}), {status: 200})
-    } catch (error) {
-        return new NextResponse(JSON.stringify({error : "Gagal menghitung jumlah user"}),
+    } catch (err) {
+        return new NextResponse(JSON.stringify({error : `Gagal menghitung respon Llama karena ${err}`}),
             {status: 500, headers: {"Content-Type" : "application/json"}}
         )
     }

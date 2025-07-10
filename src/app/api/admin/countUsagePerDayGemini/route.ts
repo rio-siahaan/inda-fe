@@ -6,7 +6,7 @@ export async function POST() {
     const {usage} = await res.json()
 
     return new Response(JSON.stringify({usage : usage}))
-  } catch (error) {
-    throw new Error("Gagal mendapatkan penggunaan bulanan");
+  } catch (err) {
+    throw new Error(`Gagal mendapatkan penggunaan bulanan karena ${err}`);
   }
 }

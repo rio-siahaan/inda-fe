@@ -6,7 +6,6 @@ import {
   BulbOutlined,
   DoubleRightOutlined,
   PoweroffOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import Admin from "./Admin";
 import { useState } from "react";

@@ -14,69 +14,6 @@ export default function NewEditFailLayout() {
   const [status, setStatus] = useState<number>(0);
   const [modal, setModal] = useState(false);
   const [csvFiles, setCsvFiles] = useState<{ name: string; url: string }[]>([]);
-  const [jumlahJson, setJumlahJson] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [progres, setProgres] = useState("");
-  const [error, setError] = useState(false);
-  const [proses, setProses] = useState(0);
-
-  const handleMintaData = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const batasBawah = parseInt(
-      (document.getElementById("batasBawah") as HTMLInputElement)?.value
-    );
-    const batasAtas = parseInt(
-      (document.getElementById("batasAtas") as HTMLInputElement)?.value
-    );
-
-    setLoading(true);
-    setProgres("Mengirim permintaan ke server....");
-
-    const totalJson = batasAtas - batasBawah;
-
-    try {
-      const res = await fetch("/api/admin/fetchJson", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          batasAtas: batasAtas,
-          batasBawah: batasBawah,
-        }),
-      });
-
-      if (!res.body) throw new Error("Tidak ada body dikirim.");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let buffer = "";
-      let persentase = 0;
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() || "";
-
-        for (const line of lines) {
-          if (line.trim()) {
-            const parsed = JSON.parse(line);
-            setJumlahJson((prev) => [...prev, parsed]);
-            persentase += 1;
-            setProses((persentase / totalJson) * 100);
-          }
-        }
-      }
-      setProgres("Selesai menerima data.");
-      setLoading(false);
-      setStatus(2);
-    } catch (error) {
-      setError(true);
-      setProgres("Gagal streaming data.");
-    }
-  };
 
   return (
     <div

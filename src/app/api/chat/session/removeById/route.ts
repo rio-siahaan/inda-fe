@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { NextApiRequest, NextApiResponse } from "next"
+import { NextApiResponse } from "next"
 import { NextRequest } from "next/server"
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
       },
     })
 
-    const baseUrl = process.env.NEXTAUTH_URL
+    const baseUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL
     const getNewConversationId = await fetch(`${baseUrl}/api/chat/startOrGetConversation`, {
       method: "POST",
       headers: {"Content-Type" : "application/json"},

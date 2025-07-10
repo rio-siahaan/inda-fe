@@ -60,7 +60,7 @@ export default function Sidebar({ vision, setVision }: SidebarProps) {
           </Link>
 
           <Link
-            href="/neweditfail"
+            href="/editfail"
             className={`${
               path === "/editfail" ? "text-cyan" : ""
             } items-center`}
@@ -73,7 +73,7 @@ export default function Sidebar({ vision, setVision }: SidebarProps) {
           <button
             className={`cursor-pointer items-center text-left`}
             onClick={() => {
-              setVision(false), signOut({ callbackUrl: "/login" });
+              setVision(false); signOut({ callbackUrl: "/login" });
             }}
           >
             <PoweroffOutlined className="mr-3" />

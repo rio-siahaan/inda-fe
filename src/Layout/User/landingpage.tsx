@@ -60,7 +60,7 @@ export default function LandingPage() {
           </p>
           <img
             className="hidden md:block"
-            src="/indaLanding.png"
+            src="/inda-landing.png"
             alt="gambar INDA"
             width={400}
             height={400}

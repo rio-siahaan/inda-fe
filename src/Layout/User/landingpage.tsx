@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "@/component/User/Footer";
+import Footer from "../../component/User/Footer";
 import {
   AppstoreAddOutlined,
   ArrowRightOutlined,
@@ -10,7 +10,7 @@ import {
   FundOutlined,
   PieChartOutlined,
 } from "@ant-design/icons";
-import Navbar from "@/component/User/Navbar";
+import Navbar from "../../component/User/Navbar";
 
 export default function LandingPage() {
   return (

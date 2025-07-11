@@ -1,6 +1,6 @@
 "use client";
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import Loading from "../Loading";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { FallOutlined, RiseOutlined } from "@ant-design/icons";
 import Loading from "../Loading";
 

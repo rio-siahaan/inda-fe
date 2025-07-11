@@ -1,4 +1,4 @@
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { useState } from "react";
 
 export default function InputBatasVar(){

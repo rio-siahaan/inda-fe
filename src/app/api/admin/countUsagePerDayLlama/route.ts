@@ -1,4 +1,4 @@
-import { countUsagePerDayLlama } from "@/lib/countUsagePerDayLlama";
+import { countUsagePerDayLlama } from "../../../../lib/countUsagePerDayLlama";
 
 export async function POST() {
   try {

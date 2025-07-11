@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 

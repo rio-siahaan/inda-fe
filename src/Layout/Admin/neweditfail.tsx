@@ -1,7 +1,7 @@
 "use client";
 
-import TabelData from "@/component/Admin/TabelData";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import TabelData from "../../component/Admin/TabelData";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { WarningOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import KepalaModal from "./kepalaModal";

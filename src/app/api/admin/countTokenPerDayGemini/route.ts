@@ -1,4 +1,4 @@
-import { countTokenPerDayGemini } from "@/lib/countTokenPerDayGemini"
+import { countTokenPerDayGemini } from "../../../../lib/countTokenPerDayGemini"
 
 export async function POST(){
     try {

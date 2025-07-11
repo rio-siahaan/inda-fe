@@ -7,11 +7,11 @@ import {
   RobotOutlined,
   SendOutlined,
 } from "@ant-design/icons";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "next/navigation";
-import Loading from "@/component/Loading";
-import { useChatHistory } from "@/lib/hooks/useChatHistory";
+import Loading from "../../../component/Loading";
+import { useChatHistory } from "../../../lib/hooks/useChatHistory";
 import { useSession } from "next-auth/react";
 
 export default function ChatInda() {

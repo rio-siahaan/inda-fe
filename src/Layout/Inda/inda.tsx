@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react";
-import SidebarInda from "@/component/User/Inda/Sidebar";
-import NavbarInda from "@/component/User/Inda/Navbar";
-import ChatInda from "@/component/User/Inda/Chat";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import SidebarInda from "../../component/User/Inda/Sidebar";
+import NavbarInda from "../../component/User/Inda/Navbar";
+import ChatInda from "../../component/User/Inda/Chat";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 
 export default function IndaPage() {
   const [sidebar, setSidebar] = useState(true);

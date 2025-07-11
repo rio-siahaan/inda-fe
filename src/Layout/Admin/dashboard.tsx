@@ -1,15 +1,15 @@
 "use client";
 
-import Card from "@/component/Admin/Card";
-import LineChartBulanan from "@/component/Admin/LineChartBulanan";
-import TokenPerDayGemini from "@/component/Admin/TokenPerDayGemini";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import Card from "../../component/Admin/Card";
+import LineChartBulanan from "../../component/Admin/LineChartBulanan";
+import TokenPerDayGemini from "../../component/Admin/TokenPerDayGemini";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { useEffect, useState } from "react";
-import TokenPerDayLlama from "@/component/Admin/TokenPerDayLlama";
-import UsagePerDayGemini from "@/component/Admin/UsagePerDayGemini";
-import UsagePerDayLlama from "@/component/Admin/UsagePerDayLlama";
-import ResponsePerDayGemini from "@/component/Admin/ResponsePerDayGemini";
-import ResponsePerDayLlama from "@/component/Admin/ResponsePerDayLlama";
+import TokenPerDayLlama from "../../component/Admin/TokenPerDayLlama";
+import UsagePerDayGemini from "../../component/Admin/UsagePerDayGemini";
+import UsagePerDayLlama from "../../component/Admin/UsagePerDayLlama";
+import ResponsePerDayGemini from "../../component/Admin/ResponsePerDayGemini";
+import ResponsePerDayLlama from "../../component/Admin/ResponsePerDayLlama";
 
 export default function DashboardLayout() {
   const { dark } = useDarkMode() ?? {};

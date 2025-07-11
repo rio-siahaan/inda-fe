@@ -1,4 +1,4 @@
-import LandingPage from "@/Layout/User/landingpage";
+import LandingPage from "../../../Layout/User/landingpage";
 import { Metadata } from "next";
 
 export const metadata : Metadata = {

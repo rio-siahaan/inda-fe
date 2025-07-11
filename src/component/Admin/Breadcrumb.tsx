@@ -1,6 +1,6 @@
 "use client";
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { RightOutlined } from "@ant-design/icons";
 import { usePathname } from "next/navigation";
 

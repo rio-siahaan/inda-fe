@@ -1,4 +1,4 @@
-import { countUsagePerDayGemini } from "@/lib/countUsagePerDayGemini";
+import { countUsagePerDayGemini } from "../../../../lib/countUsagePerDayGemini";
 
 export async function POST() {
   try {

@@ -1,4 +1,4 @@
-import RegisterPage from "@/Layout/Auth/register";
+import RegisterPage from "../../../Layout/Auth/register";
 import { Metadata } from "next";
 
 export const metadata : Metadata = {

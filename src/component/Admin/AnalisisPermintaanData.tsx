@@ -1,6 +1,6 @@
 "use client"
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 
 export default function AnalisisPermintaanData() {
   const { dark } = useDarkMode();

@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import Admin from "./Admin";
 import { useState } from "react";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { signOut } from "next-auth/react";
 
 type HeaderProps = {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import { AppstoreOutlined, DoubleRightOutlined, LogoutOutlined } from "@ant-design/icons";
 import { signOut } from "next-auth/react";
 

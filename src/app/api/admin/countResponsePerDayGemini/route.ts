@@ -1,4 +1,4 @@
-import { countResponseTimePerDayGemini } from "@/lib/countResponseTimePerDayGemini";
+import { countResponseTimePerDayGemini } from "../../../../lib/countResponseTimePerDayGemini";
 import { NextResponse } from "next/server";
 
 export async function POST(){

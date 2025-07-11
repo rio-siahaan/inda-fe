@@ -1,4 +1,4 @@
-import { ChangeProfile } from "@/lib/changeProfile";
+import { ChangeProfile } from "../../../lib/changeProfile";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest){

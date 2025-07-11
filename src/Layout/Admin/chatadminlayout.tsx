@@ -1,8 +1,8 @@
 "use client";
 
-import Header from "@/component/Admin/Header";
-import Sidebar from "@/Layout/Admin/sidebar";
-import { DarkModeProvider } from "@/lib/context/DarkModeContext";
+import Header from "../../component/Admin/Header";
+import Sidebar from "../../Layout/Admin/sidebar";
+import { DarkModeProvider } from "../../lib/context/DarkModeContext";
 import { useState } from "react";
 
 export default function ChatAdminLayout({

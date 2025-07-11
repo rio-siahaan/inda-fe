@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { convertJsonToCsvAndSave } from "@/lib/convert-to-csv";
+import { convertJsonToCsvAndSave } from "../../../../lib/convert-to-csv";
 
 export async function POST(req: NextRequest) {
   try {

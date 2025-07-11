@@ -1,6 +1,6 @@
 
 // import Breadcrumb from "@/component/Admin/Breadcrumb";
-import DashboardLayout from "@/Layout/Admin/dashboard";
+import DashboardLayout from "../../../Layout/Admin/dashboard";
 import { Metadata } from "next";
 
 export const metadata : Metadata = {

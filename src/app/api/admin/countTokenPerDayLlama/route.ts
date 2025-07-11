@@ -1,4 +1,4 @@
-import { countTokenPerDayLlama } from "@/lib/countTokenPerDayLlama"
+import { countTokenPerDayLlama } from "../../../../lib/countTokenPerDayLlama"
 
 export async function POST(){
     try {

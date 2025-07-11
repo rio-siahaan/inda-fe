@@ -1,4 +1,4 @@
-import { countMessages } from "@/lib/countMessages";
+import { countMessages } from "../../../../lib/countMessages";
 
 export async function POST(){
     try{

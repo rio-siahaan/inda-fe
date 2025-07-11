@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "@/component/User/Logo";
+import Logo from "../../../component/User/Logo";
 import {
   BulbFilled,
   BulbOutlined,
@@ -9,12 +9,12 @@ import {
   LoadingOutlined,
   RestOutlined,
 } from "@ant-design/icons";
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useConversations } from "@/lib/hooks/useConversation";
-import Loading from "@/component/Loading";
+import { useConversations } from "../../../lib/hooks/useConversation";
+import Loading from "../../../component/Loading";
 
 type SidebarIndaProps = {
   sidebar: boolean;

@@ -1,4 +1,4 @@
-import { countUser } from "@/lib/countUser";
+import { countUser } from "../../../../lib/countUser";
 
 export async function POST(){
     try{

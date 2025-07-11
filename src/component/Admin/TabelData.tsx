@@ -1,6 +1,6 @@
 "use client";
 
-import { useDarkMode } from "@/lib/context/DarkModeContext";
+import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 

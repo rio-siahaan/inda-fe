@@ -1,5 +1,5 @@
-import Breadcrumb from "@/component/Admin/Breadcrumb";
-import ChatAdminLayout from "@/Layout/Admin/chatadminlayout";
+import Breadcrumb from "../../component/Admin/Breadcrumb";
+import ChatAdminLayout from "../../Layout/Admin/chatadminlayout";
 
 export default function AdminLayout({
   children,

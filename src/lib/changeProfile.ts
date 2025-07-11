@@ -1,4 +1,4 @@
-import {prisma} from "@/lib/prisma";
+import {prisma} from "../lib/prisma";
 
 export async function ChangeProfile(name: string, personifikasi: string, email: string){
     try {

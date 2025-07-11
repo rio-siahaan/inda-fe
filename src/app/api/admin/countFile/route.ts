@@ -1,4 +1,4 @@
-import { countFile }  from "@/lib/countFile";
+import { countFile }  from "../../../../lib/countFile";
 
 export async function POST() {
   try {

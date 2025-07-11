@@ -1,9 +1,9 @@
 // /app/api/reset/send-token.ts
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "../../../../../lib/prisma";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import { resetEmailTemplate } from "@/lib/resetEmailTemplate";
+import { resetEmailTemplate } from "../../../../../lib/resetEmailTemplate";
 
 export async function POST(req: NextRequest) {
   const { email } = await req.json();

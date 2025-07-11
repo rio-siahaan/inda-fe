@@ -5,7 +5,6 @@ const nextConfig = {
   },
   experimental: {
     allowedDevOrigins: ["http://localhost:3000"],
-    appDir: true,
   },
 };
 

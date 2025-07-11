@@ -1,4 +1,4 @@
-import { ListFile } from "@/lib/listFile";
+import { ListFile } from "../../../../lib/listFile";
 import { NextResponse } from "next/server";
 
 export async function GET() {

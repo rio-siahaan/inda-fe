@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import {
   EyeInvisibleOutlined,
@@ -11,8 +11,8 @@ import {
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
-  const searchParams = useSearchParams();
+function LoginForm(){
+const searchParams = useSearchParams();
   const emailRef = useRef<HTMLInputElement>(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -57,9 +57,7 @@ export default function LoginPage() {
     <section className="flex justify-center items-center min-h-screen bg-gray-100 p-10">
       <div className="w-full max-w-sm">
         {success && (
-          <p className="text-green-500 text-center text-sm mb-3">
-            Login sukses!
-          </p>
+          <p className="text-green-500 text-center text-sm mb-3">Login sukses!</p>
         )}
         {error && (
           <p className="text-red-500 text-center text-sm mb-3">{error}</p>
@@ -111,7 +109,7 @@ export default function LoginPage() {
                 {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
               </span>
             </div>
-            
+
             <div className="text-right">
               <Link
                 href="/emailconfirmation"
@@ -167,4 +165,12 @@ export default function LoginPage() {
       </div>
     </section>
   );
+}
+
+export default function LoginPage() {
+  return(
+    <Suspense fallback={<div>Memuat form...</div>}>
+      <LoginForm/>
+    </Suspense>
+  )
 }

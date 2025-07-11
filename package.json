@@ -2,8 +2,11 @@
   "name": "inda",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
+  },
   "scripts": {
-    "generate": "prisma generate --schema=prisma.schema.prisma",
+    "generate": "prisma generate --schema=./prisma/schema.prisma",
     "dev": "next dev --turbopack",
     "build": "prisma generate && next build ",
     "start": "next start",

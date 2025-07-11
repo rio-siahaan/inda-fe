@@ -58,13 +58,13 @@ export default function LandingPage() {
             permintaan data BPS Provinsi Sumatera Utara dan konsultasi statistik
             resmi secara interaktif.
           </p>
-          <Image
+          <img
             className="hidden md:block"
             src="/images/inda-landing.png"
             alt="gambar INDA"
             width={400}
             height={400}
-            priority
+            // priority
           />
         </div>
       </section>

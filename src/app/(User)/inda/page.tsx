@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import SidebarInda from "@/component/User/Inda/Sidebar";
-import NavbarInda from "@/component/User/Inda/Navbar";
+// import SidebarInda from "@/component/User/Inda/Sidebar";
+import SidebarInda from "../../../component/User/Inda/Sidebar";
+// import NavbarInda from "@/component/User/Inda/Navbar";
+import NavbarInda from "../../../component/User/Inda/Navbar";
 import { useDarkMode } from "@/lib/context/DarkModeContext";
 
 export default function IndaRedirect() {

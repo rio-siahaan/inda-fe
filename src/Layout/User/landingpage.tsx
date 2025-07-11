@@ -11,7 +11,7 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 import Navbar from "../../component/User/Navbar";
-import path from "node:path";
+import path from "path";
 
 export default function LandingPage() {
   const heroSvg = path.join(process.cwd(), 'public', 'hero.csv')

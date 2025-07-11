@@ -35,13 +35,13 @@ export default function LandingPage() {
           </Link>
         </div>
         <div>
-          <img
+          <Image
             className="hidden md:block"
             src="/hero.svg"
             alt="Hero.png"
             width={500}
             height={500}
-            // priority
+            priority
           />
         </div>
       </section>
@@ -58,13 +58,13 @@ export default function LandingPage() {
             permintaan data BPS Provinsi Sumatera Utara dan konsultasi statistik
             resmi secara interaktif.
           </p>
-          <img
+          <Image
             className="hidden md:block"
-            src="/inda-landing.png"
+            src="/images/inda-landing.png"
             alt="gambar INDA"
             width={400}
             height={400}
-            // priority
+            priority
           />
         </div>
       </section>

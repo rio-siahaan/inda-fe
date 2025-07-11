@@ -11,10 +11,8 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 import Navbar from "../../component/User/Navbar";
-import path from "path";
 
 export default function LandingPage() {
-  const heroSvg = path.join(process.cwd(), 'public', 'hero.csv')
   return (
     <>
       <Navbar />
@@ -37,13 +35,13 @@ export default function LandingPage() {
           </Link>
         </div>
         <div>
-          <Image
+          <img
             className="hidden md:block"
-            src={heroSvg}
+            src="/hero.svg"
             alt="Hero.png"
             width={500}
             height={500}
-            priority
+            // priority
           />
         </div>
       </section>
@@ -60,13 +58,13 @@ export default function LandingPage() {
             permintaan data BPS Provinsi Sumatera Utara dan konsultasi statistik
             resmi secara interaktif.
           </p>
-          <Image
+          <img
             className="hidden md:block"
             src="/indaLanding.png"
             alt="gambar INDA"
             width={400}
             height={400}
-            priority
+            // priority
           />
         </div>
       </section>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import notFound from "../../public/404.png"
 
 export default function NotFound() {
     return (
@@ -11,7 +12,7 @@ export default function NotFound() {
                 </p>
                 <p className="text-center">Kembali ke <Link href="/" className="no-underline hover:underline text-cyan">Halaman Awal</Link></p>
             </div>
-            <Image src="/images/404.png" alt="404" width={500} height={500}/>
+            <Image src={notFound} alt="404" width={500} height={500}/>
         </section>
     );
 }

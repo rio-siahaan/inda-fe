@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import Navbar from "../../component/User/Navbar";
 import heroSvg from "../../../public/hero.svg"
+import indaLanding from "../../../public/inda-landing.png"
 
 export default function LandingPage() {
   return (
@@ -59,13 +60,13 @@ export default function LandingPage() {
             permintaan data BPS Provinsi Sumatera Utara dan konsultasi statistik
             resmi secara interaktif.
           </p>
-          <img
+          <Image
             className="hidden md:block"
-            src="../../../public/images/inda-landing.png"
+            src={indaLanding}
             alt="gambar INDA"
             width={400}
             height={400}
-            // priority
+            priority
           />
         </div>
       </section>

@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations } from "../../../lib/hooks/useConversation";
 import Loading from "../../../component/Loading";
+import avatar from "../../../../public/avatar-2.jpg"
 
 type SidebarIndaProps = {
   sidebar: boolean;
@@ -272,7 +273,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
                 className="flex gap-3 items-center cursor-pointer"
               >
                 <Image
-                  src={userImage || "/avatar-2.jpg"}
+                  src={userImage || avatar}
                   alt="user"
                   width={20}
                   height={20}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import forgotPassword from "../../../public/forgot password.png"
 
 export default function EmailConfirmationPage() {
   const [email, setEmail] = useState("");
@@ -67,7 +68,7 @@ export default function EmailConfirmationPage() {
       <aside>
         <Image
           className="md:block hidden"
-          src="/forgot password.png"
+          src={forgotPassword}
           alt="forgot password"
           width={500}
           height={500}

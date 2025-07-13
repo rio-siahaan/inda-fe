@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import avatar from "../../../public/avatar-2.jpg"
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -119,7 +120,7 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <Image
-                src={userImage || "/avatar-2.jpg"}
+                src={userImage || avatar}
                 alt="user"
                 width={24}
                 height={24}

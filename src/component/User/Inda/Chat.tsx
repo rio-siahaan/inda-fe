@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import Loading from "../../../component/Loading";
 import { useChatHistory } from "../../../lib/hooks/useChatHistory";
 import { useSession } from "next-auth/react";
+import avatar from "../../../../public/avatar-2.jpg"
 
 export default function ChatInda() {
   const { dark } = useDarkMode();
@@ -262,7 +263,7 @@ export default function ChatInda() {
                     )}
                     {chat.role === "user" && (
                       <Image
-                        src={userImage || "/avatar-2.jpg"}
+                        src={userImage || avatar}
                         alt="user"
                         width={30}
                         height={30}

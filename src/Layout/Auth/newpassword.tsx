@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import emailConfirmation from "../../../public/email confirmation.png"
 
 function FormComponent() {
   const params = useSearchParams();
@@ -89,7 +90,7 @@ export default function NewPasswordPage() {
       <aside>
         <Image
           className="md:block hidden"
-          src="/email confirmation.png"
+          src={emailConfirmation}
           alt="email confirmation"
           width={500}
           height={500}

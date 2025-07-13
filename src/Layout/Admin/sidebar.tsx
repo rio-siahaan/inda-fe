@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useDarkMode } from "../../lib/context/DarkModeContext";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import logoBps from "../../../public/bps.svg"
 
 type SidebarProps = {
   vision: boolean;
@@ -37,7 +38,7 @@ export default function Sidebar({ vision, setVision }: SidebarProps) {
       <div className="w-full mb-5">
         <Link href="/">
           <Image
-            src="/bps.svg"
+            src={logoBps}
             alt="logo bps"
             width={100}
             height={100}

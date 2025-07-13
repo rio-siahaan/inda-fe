@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     if (conversations.length === 0) {
       const newConversation = await prisma.conversations.create({
         data: {
-          userId: userId,
+          userid: userId,
           title: `Percakapan ${new Date().toLocaleString()}`,
         },
       });

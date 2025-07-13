@@ -19,8 +19,8 @@ export async function GET(
       select: {
         role: true,
         message: true,
-        selectedModel: true,
-        responseTime: true
+        selectedmodel: true,
+        responsetime: true
       },
     });
 

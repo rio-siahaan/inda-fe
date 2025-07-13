@@ -35,10 +35,10 @@ export async function POST(req: NextRequest) {
       conversationId: id_chat,
       role: "user",
       message: response_text,
-      selectedModel: selectedModel,
-      responseTime: 0,
-      inputToken: usage_metadata?.input_tokens || 0,
-      outputToken: 0,
+      selectedmodel: selectedModel,
+      responsetime: 0,
+      inputtoken: usage_metadata?.input_tokens || 0,
+      outputtoken: 0,
     },
   })
   
@@ -48,19 +48,19 @@ export async function POST(req: NextRequest) {
       conversationId: id_chat,
       role: "bot",
       message: processed_text,
-      selectedModel: selectedModel,
-      responseTime: responseTimeTrack,
-      inputToken: 0,
-      outputToken: usage_metadata?.output_tokens,
+      selectedmodel: selectedModel,
+      responsetime: responseTimeTrack,
+      inputtoken: 0,
+      outputtoken: usage_metadata?.output_tokens,
     },
   })
 
   await prisma.usages.create({
     data: {
-      selectedModel: selectedModel,
-      responseTime: responseTimeTrack,
-      inputToken: usage_metadata?.input_tokens || 0,
-      outputToken: usage_metadata?.output_tokens || 0,
+      selectedmodel: selectedModel,
+      responsetime: responseTimeTrack,
+      inputtoken: usage_metadata?.input_tokens || 0,
+      outputtoken: usage_metadata?.output_tokens || 0,
     }
   })
 

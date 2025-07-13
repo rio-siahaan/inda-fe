@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     const conversation = await prisma.conversations.create({
       data: {
-        userId: userId,
+        userid: userId,
         title: `Percakapan ${new Date().toLocaleString()}`,
       },
     });

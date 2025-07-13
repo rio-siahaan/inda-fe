@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
         title: true,
       },
       orderBy: {
-        updatedAt: "desc",
+        updatedat: "desc",
       },
     });
 

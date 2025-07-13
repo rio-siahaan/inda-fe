@@ -18,14 +18,14 @@ export async function POST(req: NextRequest) {
   try {
     await prisma.messages.deleteMany({
       where: {
-        conversationId: conversationId,
+        conversationid: conversationId,
       },
     })
 
     await prisma.conversations.delete({
       where: {
         id: conversationId,
-        userId: userId,
+        userid: userId,
       },
     })
 

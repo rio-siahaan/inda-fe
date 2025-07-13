@@ -11,6 +11,7 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 import Navbar from "../../component/User/Navbar";
+import heroSvg from "../../../public/hero.svg"
 
 export default function LandingPage() {
   return (
@@ -37,7 +38,7 @@ export default function LandingPage() {
         <div>
           <Image
             className="hidden md:block"
-            src="/hero.svg"
+            src={heroSvg}
             alt="Hero.png"
             width={500}
             height={500}
@@ -60,7 +61,7 @@ export default function LandingPage() {
           </p>
           <img
             className="hidden md:block"
-            src="/images/inda-landing.png"
+            src="../../../public/images/inda-landing.png"
             alt="gambar INDA"
             width={400}
             height={400}

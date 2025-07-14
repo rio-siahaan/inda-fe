@@ -11,7 +11,6 @@ import {
 } from "@ant-design/icons";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import avatar from "../../../public/avatar-2.jpg"
 
 export default function Navbar() {
   const { data: session, status } = useSession();

@@ -7,7 +7,6 @@ const authPage = [
     "/login",
     "/newpassword",
     "/register",
-    "/profil"
   ];
 
 export default function withAuth(middleware : NextMiddleware, requireAuth : string[]){

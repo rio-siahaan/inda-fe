@@ -6,7 +6,7 @@ export async function GET(
 ) {
   const conversationId = req.nextUrl.searchParams.get("conversationId");
 
-  if (!conversationId || typeof conversationId !== "string") {
+  if (!conversationId || isNaN(Number(conversationId))) {
     return new Response(JSON.stringify({error : "conversationId tidak valid"}), {
       status : 400
     })

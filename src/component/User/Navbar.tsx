@@ -21,7 +21,6 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [userRole, setUserRole] = useState()
-  const userImage = session?.user?.image;
 
   //  buat responsif
   useEffect(() => {
@@ -119,7 +118,7 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <Image
-                src={userImage || ""}
+                src={session.user?.image || ""}
                 alt="user"
                 width={24}
                 height={24}

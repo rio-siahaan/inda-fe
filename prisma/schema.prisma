@@ -8,7 +8,7 @@ datasource db {
 }
 
 model user {
-    id              String   @id @default(cuid())
+    id              String   @id @default(uuid()) @db.Uuid
     name            String?
     email           String   @unique
     password        String?
@@ -24,8 +24,8 @@ model user {
 }
 
 model account {
-    id                 String  @id @default(cuid())
-    userid             String
+    id                 String  @id @default(uuid()) @db.Uuid
+    userid             String  @db.Uuid
     type               String
     provider           String
     provideraccountid  String
@@ -42,9 +42,9 @@ model account {
 }
 
 model session {
-    id           String   @id @default(cuid())
+    id           String   @id @default(uuid()) @db.Uuid
     sessiontoken String   @unique
-    userid       String
+    userid       String   @db.Uuid
     expires      DateTime
 
     user user @relation(fields: [userid], references: [id])
@@ -59,8 +59,8 @@ model VerificationToken {
 }
 
 model conversations {
-  id                String @id @default(cuid())
-  userid            String
+  id                String @id @default(uuid()) @db.Uuid
+  userid            String @db.Uuid
   title             String?
   createdat         DateTime @default(now())
   updatedat         DateTime? @updatedAt
@@ -71,8 +71,8 @@ model conversations {
 }
 
 model messages {
-  id                String @id @default(cuid())
-  conversationid    String
+  id                String @id @default(uuid()) @db.Uuid
+  conversationid    String @db.Uuid
   role              String
   message           String
   selectedmodel     String
@@ -85,7 +85,7 @@ model messages {
 }
 
 model usages {
-  id              String   @id @default(cuid())
+  id              String   @id @default(uuid()) @db.Uuid
   selectedmodel   String
   responsetime    Int
   inputtoken      Int
@@ -94,7 +94,7 @@ model usages {
 }
 
 model files {
-  id              String @id @default(cuid())
+  id              String @id @default(uuid()) @db.Uuid
   name            String
   created_at      DateTime @default(now())
 }

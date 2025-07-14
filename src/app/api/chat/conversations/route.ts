@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const conversations = await prisma.conversations.findMany({
-      where: { userId },
+      where: { userid },
       select: {
         id: true,
         title: true,

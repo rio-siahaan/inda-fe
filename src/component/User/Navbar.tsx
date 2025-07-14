@@ -120,7 +120,7 @@ export default function Navbar() {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <Image
-                src={userImage || avatar}
+                src={userImage || ""}
                 alt="user"
                 width={24}
                 height={24}

@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const conversations = await prisma.conversations.findMany({
       where: {
-        userid: userId,
+        userid: Number(userId),
       },
       select: {
         id: true,

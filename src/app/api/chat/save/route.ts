@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
   // Simpan pesan dari user
   await prisma.messages.create({
     data: {
-      conversationid: id_chat,
+      conversationid: Number(id_chat),
       role: "user",
       message: response_text,
       selectedmodel: selectedModel,
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   // Simpan pesan dari bot
   await prisma.messages.create({
     data: {
-      conversationid: id_chat,
+      conversationid: Number(id_chat),
       role: "bot",
       message: processed_text,
       selectedmodel: selectedModel,

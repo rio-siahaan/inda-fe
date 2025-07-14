@@ -14,7 +14,7 @@ export async function GET(
 
   try {
     const logs = await prisma.messages.findMany({
-      where: { conversationid : conversationId },
+      where: { conversationid : Number(conversationId) },
       orderBy: { created_at: "asc" },
       select: {
         role: true,

@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   try {
     let conversations = await prisma.conversations.findMany({
-      where: { userId },
+      where: { userid: userId },
     });
 
     if (conversations.length === 0) {

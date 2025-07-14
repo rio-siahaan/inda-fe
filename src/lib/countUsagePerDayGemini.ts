@@ -10,7 +10,7 @@ export async function countUsagePerDayGemini() {
   const messages = await prisma.messages.findMany({
     where: {
       role: "bot",
-      selectedModel: 'gemini',
+      selectedmodel: 'gemini',
       created_at: {
         gte: startOfDay,
         lte: endOfDay,

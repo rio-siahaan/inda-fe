@@ -11,21 +11,21 @@ export async function countResponseTimePerDayGemini() {
 
     const messagesToday = await prisma.messages.findMany({
       where: {
-        selectedModel: "gemini",
+        selectedmodel: "gemini",
         created_at: {
           gte: todayStart,
           lte: todayEnd,
         },
       },
       select: {
-        responseTime: true
+        responsetime: true
       },
     });
 
     const totalUsage = messagesToday.length;
 
     const totalResponse = messagesToday.reduce(
-      (sum, msg) => sum + (msg.responseTime ?? 0),
+      (sum, msg) => sum + (msg.responsetime ?? 0),
       0
     );
 

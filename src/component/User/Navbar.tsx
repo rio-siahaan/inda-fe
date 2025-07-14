@@ -52,7 +52,7 @@ export default function Navbar() {
     };
 
     handleResize();
-    getRole()
+    if (session) getRole()
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousedown", handleClickOutside);

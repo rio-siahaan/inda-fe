@@ -42,7 +42,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Password salah");
         }
 
-        return user;
+        return {
+          ...user,
+          id: user.id.toString()
+        };
       },
     }),
     GoogleProvider({

@@ -8,6 +8,7 @@ import {
   EditOutlined,
   LoadingOutlined,
   RestOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import { useSession } from "next-auth/react";
@@ -15,7 +16,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations } from "../../../lib/hooks/useConversation";
 import Loading from "../../../component/Loading";
-import avatar from "../../../../public/avatar-2.jpg"
+import avatar from "../../../../public/avatar-2.jpg";
 
 type SidebarIndaProps = {
   sidebar: boolean;
@@ -25,7 +26,7 @@ type SidebarIndaProps = {
 export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   const { dark, setDark } = useDarkMode();
   const { data: session, update } = useSession();
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
   const userName = session?.user?.name;
   const userEmail = session?.user?.email;
   const userImage = session?.user?.image;
@@ -73,30 +74,29 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   //   fetchConversation();
   // }, [status, session]);
 
-
   useEffect(() => {
-  const fetchPersonifikasi = async () => {
-    if (!session?.user?.email) return;
+    const fetchPersonifikasi = async () => {
+      if (!session?.user?.email) return;
 
-    try {
-      const res = await fetch(`/api/getProfile?email=${session.user.email}`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`/api/getProfile?email=${session.user.email}`);
+        const data = await res.json();
 
-      if (res.ok) {
-        setPersonifikasi(data.personifikasi || "");
-        setUserId(data.id || "")
-      } else {
-        console.error("Gagal ambil personifikasi:", data);
+        if (res.ok) {
+          setPersonifikasi(data.personifikasi || "");
+          setUserId(data.id || "");
+        } else {
+          console.error("Gagal ambil personifikasi:", data);
+        }
+      } catch (error) {
+        console.error("Error fetch personifikasi:", error);
       }
-    } catch (error) {
-      console.error("Error fetch personifikasi:", error);
-    }
-  };
+    };
 
-  if (showForm) {
-    fetchPersonifikasi();
-  }
-}, [showForm, session?.user?.email]);
+    if (showForm) {
+      fetchPersonifikasi();
+    }
+  }, [showForm, session?.user?.email]);
 
   const handleChangePersonification = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,16 +111,16 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
           email: userEmail,
         }),
       });
-      router.refresh()
+      router.refresh();
       if (!response.ok) {
         setStatus("Tidak dapat merubah personifikasi. Tolong coba lagi nanti!");
         return "";
-      }else{
-        await update({personifikasi: personifikasi})
+      } else {
+        await update({ personifikasi: personifikasi });
         setStatus("Sukses mengganti personifikasi");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -272,17 +272,23 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
                 onClick={() => setShowForm((prev) => !prev)}
                 className="flex gap-3 items-center cursor-pointer"
               >
-                <Image
-                  src={userImage || avatar}
-                  alt="user"
-                  width={20}
-                  height={20}
-                  className="rounded-full"
-                />
+                {userImage != null ? (
+                  <Image
+                    src={userImage || avatar}
+                    alt="user"
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <UserOutlined />
+                )}
                 <p className="text-xs">{userName}</p>
               </button>
             </div>
-            {status && <p className="p-1 bg-cyan text-white text-xs">{status}</p>}
+            {status && (
+              <p className="p-1 bg-cyan text-white text-xs">{status}</p>
+            )}
             {showForm && (
               <>
                 {/* Kondisi 1: Belum ada session */}
@@ -327,7 +333,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
                       className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm cursor-pointer"
                       disabled={loading}
                     >
-                      {loading ? <LoadingOutlined/> : <>Simpan</>}
+                      {loading ? <LoadingOutlined /> : <>Simpan</>}
                     </button>
                   </form>
                 )}

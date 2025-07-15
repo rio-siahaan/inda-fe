@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-    const baseUrl = process.env.NEXTAUTH_URL
+    const baseUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL
     const getNewConversationId = await fetch(
       `${baseUrl}/api/chat/startOrGetConversation`,
       {

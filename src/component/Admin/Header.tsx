@@ -68,7 +68,7 @@ export default function Header({ sidebar, setSidebar }: HeaderProps) {
       {adminMenu && (
         <div
           className={`fixed top-14 right-5 w-40 rounded-lg shadow-lg z-50 p-4 ${
-            dark ? "bg-dark-blue text-white" : "bg-white text-black"
+            dark ? "bg-gray-800 text-white" : "bg-white text-black"
           }`}
         >
           {/* <button className="cursor-pointer flex items-center gap-3 w-full py-2 px-2 hover:bg-gray-100 dark:hover:bg-dark">

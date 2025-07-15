@@ -197,7 +197,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
         className={`fixed md:static top-0 left-0 z-50 md:z-auto w-1/2 sm:w-2/5 md:w-1/5 min-h-screen px-4 py-6 transform transition-transform duration-300 ease-in-out ${
           sidebar ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 flex flex-col justify-between ${
-          dark ? "bg-dark-blue text-white" : "bg-white text-black"
+          dark ? "bg-gray-800 text-white" : "bg-white text-black"
         }`}
       >
         <Logo />

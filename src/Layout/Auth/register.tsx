@@ -2,7 +2,11 @@
 
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 export default function RegisterPage() {
   const namaRef = useRef<HTMLInputElement>(null);
@@ -30,21 +34,39 @@ export default function RegisterPage() {
       document.getElementById("personifikasi") as HTMLInputElement
     )?.value;
 
-    const res = await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify({ nama, email, password, personifikasi }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // 🔒 Validasi password minimal 5 karakter, ada huruf besar dan kecil
+    const passwordValid =
+      password &&
+      password.length >= 5 &&
+      /[a-z]/.test(password) &&
+      /[A-Z]/.test(password);
 
-    if (res.ok) {
-      setSuccess(true);
-      window.location.href = "/login";
-    } else {
-      const data = await res.json();
-      setError("Terdapat kesalahan : " + data.error);
-      //   alert(data.error);
+    if (!passwordValid) {
+      setError(
+        "Password harus minimal 5 karakter dan mengandung huruf besar serta huruf kecil."
+      );
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify({ nama, email, password, personifikasi }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        setSuccess(true);
+        window.location.href = "/login";
+      } else {
+        const data = await res.json();
+        setError("Terdapat kesalahan : " + data.error);
+      }
+    } catch (error) {
+      setError("Terjadi kesalahan jaringan.");
     }
 
     setLoading(false);

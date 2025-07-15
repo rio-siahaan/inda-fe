@@ -4,10 +4,11 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../lib/prisma";
 import bcrypt from "bcrypt";
+import { CustomPrismaAdapter } from "./prisma-adapter";
 
 export const authOptions: NextAuthOptions = {
   debug: true,
-  adapter: PrismaAdapter(prisma),
+  adapter: CustomPrismaAdapter(),
   session: {
     strategy: "jwt",
   },

@@ -65,7 +65,7 @@ export default function ChatInda() {
       }
     };
     fetchUser();
-  }, [session?.user?.email]);
+  }, [session]);
 
   //untuk ngirim ke fastapi
   const handleSubmit = async (e: React.FormEvent) => {
@@ -405,11 +405,15 @@ export default function ChatInda() {
           </div>
           <button
             type="submit"
-            className={`p-2 rounded-lg ${
+            className={`p-2 rounded-lg transition ${
               dark
                 ? "text-white bg-blue-600 hover:bg-blue-800"
                 : "text-dark hover:bg-gray-300"
-            } hover:opacity-80 transition cursor-pointer`}
+            } ${
+              isLoading || !input.trim() || !name || !personifikasi
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:opacity-80 cursor-pointer"
+            }`}
             disabled={isLoading || !input.trim() || !name || !personifikasi}
           >
             {isLoading ? (

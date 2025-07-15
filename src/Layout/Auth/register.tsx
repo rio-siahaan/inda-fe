@@ -151,7 +151,6 @@ export default function RegisterPage() {
               type="text"
               id="personifikasi"
               placeholder=" "
-              required
               className="peer w-full border-b-2 border-gray-300 bg-transparent text-sm text-gray-900 focus:border-blue-500 focus:outline-none pt-6 pb-2 placeholder-transparent"
             />
             <label

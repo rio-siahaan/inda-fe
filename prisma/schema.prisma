@@ -7,26 +7,26 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model User {
-    id              String   @id @default(cuid())
+model user {
+    id              Int   @id @default(autoincrement())
     name            String?
     email           String   @unique
     password        String?
     personifikasi   String?
-    emailVerified   DateTime?
     image           String?
     role            String @default("user")
-    createdAt       DateTime @default(now())
-    updatedAt       DateTime @updatedAt
+    createdat       DateTime @default(now())
+    updatedat       DateTime @updatedAt
+    emailVerified   DateTime?
 
-    accounts        Account[]
-    sessions        Session[]
-    conversations   Conversations[]
+    accounts        account[]
+    sessions        session[]
+    conversations   conversations[]
 }
 
-model Account {
-    id                 String  @id @default(cuid())
-    userId             String
+model account {
+    id                 Int  @id @default(autoincrement())
+    userid             Int
     type               String
     provider           String
     providerAccountId  String
@@ -38,17 +38,17 @@ model Account {
     id_token           String? 
     session_state      String? 
 
-    user User @relation(fields: [userId], references: [id])
+    user user @relation(fields: [userid], references: [id])
     @@unique([provider, providerAccountId])
 }
 
-model Session {
-    id           String   @id @default(cuid())
+model session {
+    id           Int   @id @default(autoincrement())
     sessionToken String   @unique
-    userId       String
+    userid       Int
     expires      DateTime
 
-    user User @relation(fields: [userId], references: [id])
+    user user @relation(fields: [userid], references: [id])
 }
 
 model VerificationToken {
@@ -59,37 +59,43 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model Conversations {
-  id                String @id @default(cuid())
-  userId            String
+model conversations {
+  id                Int @id @default(autoincrement())
+  userid            Int
   title             String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime? @updatedAt
+  createdat         DateTime @default(now())
+  updatedat         DateTime? @updatedAt
   
-  Messages          Messages[]
+  messages          messages[]
 
-  user User @relation(fields: [userId], references: [id])
+  user user @relation(fields: [userid], references: [id])
 }
 
-model Messages {
-  id                String @id @default(cuid())
-  conversationId    String
+model messages {
+  id                Int @id @default(autoincrement())
+  conversationid    Int
   role              String
   message           String
-  selectedModel     String
-  responseTime      Int?
-  inputToken        Int?
-  outputToken       Int?
+  selectedmodel     String
+  responsetime      Int?
+  inputtoken        Int?
+  outputtoken       Int?
   created_at        DateTime @default(now())
   
-  conversations Conversations @relation(fields: [conversationId], references: [id])
+  conversations conversations @relation(fields: [conversationid], references: [id])
 }
 
-model Usages {
-  id              String   @id @default(cuid())
-  selectedModel   String
-  responseTime    Int
-  inputToken      Int
-  outputToken     Int
+model usages {
+  id              Int   @id @default(autoincrement())
+  selectedmodel   String
+  responsetime    Int
+  inputtoken      Int
+  outputtoken     Int
   timestamp       DateTime @default(now())
+}
+
+model files {
+  id              Int @id @default(autoincrement())
+  name            String
+  created_at      DateTime @default(now())
 }

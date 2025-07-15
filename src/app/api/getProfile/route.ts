@@ -1,9 +1,10 @@
 import { prisma } from "../../../lib/prisma";
 import { NextRequest } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get("email");
+export async function POST(req: NextRequest) {
+  // const { searchParams } = new URL(req.url);
+  // const email = searchParams.get("email");
+  const {email} = await req.json()
 
   if (!email) {
     return new Response("Email diperlukan", { status: 400 });

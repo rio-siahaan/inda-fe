@@ -30,7 +30,11 @@ export default function ProfilLayout() {
 
   const getProfile = async () => {
     try {
-      const profilUser = await fetch(`/api/getProfile?email=${email_user}`);
+      const profilUser = await fetch(`/api/getProfile`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email : email_user})
+      });
       const { name, personifikasi } = await profilUser.json();
 
       if (name && personifikasi) {

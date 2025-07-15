@@ -6,6 +6,7 @@ import {
   LoadingOutlined,
   RobotOutlined,
   SendOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import ReactMarkdown from "react-markdown";
@@ -262,13 +263,14 @@ export default function ChatInda() {
                       <RobotOutlined className="text-2xl mt-1" />
                     )}
                     {chat.role === "user" && (
-                      <Image
-                        src={userImage || avatar}
-                        alt="user"
-                        width={30}
-                        height={30}
-                        className="rounded-full h-fit"
-                      />
+                      // <Image
+                      //   src={userImage || avatar}
+                      //   alt="user"
+                      //   width={30}
+                      //   height={30}
+                      //   className="rounded-full h-fit"
+                      // />
+                      <UserOutlined/>
                     )}
                     {isLoading ? (
                       <div className="h-50">

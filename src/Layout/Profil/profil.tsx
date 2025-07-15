@@ -76,7 +76,7 @@ export default function ProfilLayout() {
       <div className="flex items-center gap-6 mb-10">
         <div className="w-24 h-24 relative">
           <Image
-            src={gambar_user || avatar}
+            src={avatar}
             alt="User avatar"
             className="rounded-full object-cover"
             fill

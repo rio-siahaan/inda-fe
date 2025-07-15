@@ -52,7 +52,7 @@ export default function ProfilLayout() {
     setError(false);
     setSuccess(false);
     try {
-      const res = await fetch("/api/profile", {
+      const res = await fetch("/api/changeProfile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

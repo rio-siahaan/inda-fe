@@ -3,15 +3,18 @@
 import Image from "next/image";
 import { useState } from "react";
 import forgotPassword from "../../../public/forgot password.png"
+import { LoadingOutlined } from "@ant-design/icons";
 
 export default function EmailConfirmationPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setLoading(true)
 
     try {
       const res = await fetch("/api/auth/reset/send-token", {
@@ -29,6 +32,8 @@ export default function EmailConfirmationPage() {
       setSuccess("Link reset telah dikirim ke email.");
     } catch (error) {
       setError(`Terjadi kesalahan karena ${error}.`);
+    }finally{
+      setLoading(true)
     }
   };
 
@@ -58,7 +63,7 @@ export default function EmailConfirmationPage() {
               type="submit"
               className="button-blue text-white rounded-lg py-2 cursor-pointer"
             >
-              Kirim konfirmasi
+              {loading ? <LoadingOutlined/> : "Kirim konfirmasi"}
             </button>
           </div>
           {error && <p className="text-red-600 mt-2">{error}</p>}

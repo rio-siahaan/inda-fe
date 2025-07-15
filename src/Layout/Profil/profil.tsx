@@ -36,7 +36,7 @@ export default function ProfilLayout() {
         body: JSON.stringify({ email: email_user }),
       });
       const { name, personifikasi } = await profilUser.json();
-      if (name && personifikasi) {
+      if (name || personifikasi) {
         setName(name);
         setPersona(personifikasi);
       }

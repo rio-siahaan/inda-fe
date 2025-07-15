@@ -23,7 +23,7 @@ export async function GET(
         responseTime: true
       },
     });
-\
+
     console.log("Isi dari chat history : ", logs)
 
     return new Response(JSON.stringify(logs), {

@@ -104,7 +104,17 @@ export default function ChatInda() {
         throw new Error("No response body from server");
       }
 
-      const { message, responseTime, model } = await response.json();
+      const resJson = await response.json();
+
+      if (!response.ok) {
+        console.error(
+          "Server returned error:",
+          resJson?.error || "Unknown error"
+        );
+        throw new Error(resJson?.error || "Terjadi kesalahan.");
+      }
+
+      const { message, responseTime, model } = resJson;
 
       mutate(
         [

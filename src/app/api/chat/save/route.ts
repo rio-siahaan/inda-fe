@@ -2,10 +2,15 @@ import { prisma } from "../../../../lib/prisma";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { response_text, id_chat, selectedModel, name, persona } =
-    await req.json();
-  if (!response_text || !id_chat || !selectedModel || !persona) {
-    return new Response("Missing parameters", { status: 400 });
+  const { response_text, id_chat, selectedModel, name, persona } = await req.json();
+  if (!response_text || !id_chat || !selectedModel || !name || !persona) {
+    return new Response(
+    JSON.stringify({ error: "Missing parameters" }),
+    {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    }
+  );
   }
 
   const fastApiUrl = process.env.NEXT_PUBLIC_FAST_API_URL;

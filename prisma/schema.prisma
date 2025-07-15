@@ -97,5 +97,5 @@ model Usages {
 model Files {
   id              String @id @default(cuid())
   name            String
-  timestamp       DateTime @default(now())
+  created_at       DateTime @default(now())
 }

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       const newConversation = await prisma.conversations.create({
         data: {
           userId: userId,
-          title: `Percakapan ${new Date().toLocaleString()}`,
+          title: `Percakapan ${new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" })}`,
         },
       });
       conversations = [newConversation];

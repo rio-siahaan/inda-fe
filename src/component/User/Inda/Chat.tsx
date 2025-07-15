@@ -6,7 +6,6 @@ import {
   LoadingOutlined,
   RobotOutlined,
   SendOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import ReactMarkdown from "react-markdown";
@@ -35,7 +34,7 @@ export default function ChatInda() {
   const params = useParams();
   const conversationId = params.conversationId as string;
   const { chat, isLoading, mutate } = useChatHistory(conversationId);
-  const [personifikasi, setPersonifikasi] = useState("");
+  const [personifikasi, setPersonifikasi] = useState("Dilayani dengan baik selayaknya pengguna layanan");
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export default function ChatInda() {
     e.preventDefault();
     console.log("Input sudah dikirim");
     if (!input.trim()) return;
-    if (!name || !personifikasi) {
+    if (!name) {
       alert("Profil pengguna belum siap, mohon tunggu sebentar...");
       return;
     }
@@ -410,11 +409,11 @@ export default function ChatInda() {
                 ? "text-white bg-blue-600 hover:bg-blue-800"
                 : "text-dark hover:bg-gray-300"
             } ${
-              isLoading || !input.trim() || !name || !personifikasi
+              isLoading || !input.trim() || !name
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:opacity-80 cursor-pointer"
             }`}
-            disabled={isLoading || !input.trim() || !name || !personifikasi}
+            disabled={isLoading || !input.trim() || !name}
           >
             {isLoading ? (
               <LoadingOutlined />

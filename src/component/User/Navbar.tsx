@@ -119,7 +119,7 @@ export default function Navbar() {
               className="flex gap-2 items-center text-white cursor-pointer"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              {userImage ? (
+              {userImage != null ? (
                 <Image
                   src={userImage || ""}
                   alt="user"

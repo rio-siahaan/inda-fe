@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   const token = jwt.sign({ email }, process.env.JWT_SECRET!, {
     expiresIn: "15m",
   });
-  const resetLink = `${process.env.NEXT_PUBLIC_APP_URL}/newpassword?token=${token}`;
+  const resetLink = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/newpassword?token=${token}`;
 
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Atau pakai SMTP provider lain

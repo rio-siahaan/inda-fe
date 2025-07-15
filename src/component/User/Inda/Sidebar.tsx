@@ -16,7 +16,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations } from "../../../lib/hooks/useConversation";
 import Loading from "../../../component/Loading";
-import avatar from "../../../../public/avatar-2.jpg";
 
 type SidebarIndaProps = {
   sidebar: boolean;
@@ -26,7 +25,7 @@ type SidebarIndaProps = {
 export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   const { dark, setDark } = useDarkMode();
   const { data: session, update } = useSession();
-  const [userId, setUserId] = useState();
+  const userId = session?.user?.id
   const userName = session?.user?.name;
   const userEmail = session?.user?.email;
   const userImage = session?.user?.image;
@@ -36,7 +35,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   const [personifikasi, setPersonifikasi] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
-  const { conversations, isLoading, mutate } = useConversations(userId);
+  const { conversations, isLoading, mutate } = useConversations(userId || "");
 
   // useEffect(() => {
   //   const fetchConversation = async () => {
@@ -84,7 +83,6 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
         if (res.ok) {
           setPersonifikasi(data.personifikasi || "");
-          setUserId(data.id || "");
         } else {
           console.error("Gagal ambil personifikasi:", data);
         }
@@ -93,38 +91,36 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
       }
     };
 
-    if (showForm) {
       fetchPersonifikasi();
-    }
   }, [showForm, session?.user?.email]);
 
-  const handleChangePersonification = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await fetch("/api/changeProfile", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: userName,
-          personifikasi: personifikasi,
-          email: userEmail,
-        }),
-      });
-      router.refresh();
-      if (!response.ok) {
-        setStatus("Tidak dapat merubah personifikasi. Tolong coba lagi nanti!");
-        return "";
-      } else {
-        await update({ personifikasi: personifikasi });
-        setStatus("Sukses mengganti personifikasi");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleChangePersonification = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   try {
+  //     setLoading(true);
+  //     const response = await fetch("/api/changeProfile", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         name: userName,
+  //         personifikasi: personifikasi,
+  //         email: userEmail,
+  //       }),
+  //     });
+  //     router.refresh();
+  //     if (!response.ok) {
+  //       setStatus("Tidak dapat merubah personifikasi. Tolong coba lagi nanti!");
+  //       return "";
+  //     } else {
+  //       await update({ personifikasi: personifikasi });
+  //       setStatus("Sukses mengganti personifikasi");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleAddSession = async () => {
     try {
@@ -269,12 +265,11 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
             <div className="hover:bg-gray-500 p-2 rounded-lg mb-2">
               <button
-                onClick={() => setShowForm((prev) => !prev)}
                 className="flex gap-3 items-center cursor-pointer"
               >
                 {userImage != null ? (
                   <Image
-                    src={userImage || avatar}
+                    src={userImage || ""}
                     alt="user"
                     width={20}
                     height={20}
@@ -286,59 +281,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
                 <p className="text-xs">{userName}</p>
               </button>
             </div>
-            {status && (
-              <p className="p-1 bg-cyan text-white text-xs">{status}</p>
-            )}
-            {showForm && (
-              <>
-                {/* Kondisi 1: Belum ada session */}
-                {!session && (
-                  <div className="flex justify-center mt-2">
-                    <LoadingOutlined spin className="text-xl text-blue-500" />
-                  </div>
-                )}
-
-                {/* Kondisi 2: Ada session, tapi personifikasi belum tersedia */}
-                {session && !personifikasi && (
-                  <div className="flex justify-center mt-2">
-                    <LoadingOutlined spin className="text-xl text-blue-500" />
-                  </div>
-                )}
-
-                {/* Kondisi 3: Ada session dan personifikasi tersedia */}
-                {session && personifikasi && (
-                  <form
-                    className="bg-white text-black p-4 rounded-lg shadow-md w-full mt-2"
-                    onSubmit={handleChangePersonification}
-                  >
-                    <div className="relative mb-4">
-                      <input
-                        type="text"
-                        id="personifikasi"
-                        value={personifikasi}
-                        onChange={(e) => setPersonifikasi(e.target.value)}
-                        placeholder=" "
-                        required
-                        className="peer w-full border-b-2 border-gray-300 bg-transparent text-sm focus:border-blue-500 focus:outline-none pt-6 pb-2 placeholder-transparent"
-                      />
-                      <label
-                        htmlFor="personifikasi"
-                        className="absolute left-0 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-5 peer-focus:text-sm peer-focus:text-blue-500"
-                      >
-                        Edit personifikasi
-                      </label>
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm cursor-pointer"
-                      disabled={loading}
-                    >
-                      {loading ? <LoadingOutlined /> : <>Simpan</>}
-                    </button>
-                  </form>
-                )}
-              </>
-            )}
+            
           </div>
         </div>
       </div>

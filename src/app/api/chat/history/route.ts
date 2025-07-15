@@ -19,11 +19,11 @@ export async function GET(
       select: {
         role: true,
         message: true,
-        selectedmodel: true,
-        responsetime: true
+        selectedModel: true,
+        responseTime: true
       },
     });
-
+\
     console.log("Isi dari chat history : ", logs)
 
     return new Response(JSON.stringify(logs), {

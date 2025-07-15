@@ -275,7 +275,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
               <p className="text-xs">{dark ? "Mode gelap" : "Mode terang"}</p>
             </button>
 
-            <div className="hover:bg-gray-500 p-2 rounded-lg mb-2 flex gap-5">
+            <div className="hover:bg-gray-500 p-2 rounded-lg mb-2 flex gap-2 items-center">
               {userImage ? (
                 <Image
                   src={userImage}

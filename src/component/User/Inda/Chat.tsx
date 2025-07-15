@@ -34,7 +34,7 @@ export default function ChatInda() {
   const params = useParams();
   const conversationId = params.conversationId as string;
   const { chat, isLoading, mutate } = useChatHistory(conversationId);
-  const [personifikasi, setPersonifikasi] = useState("Dilayani dengan baik selayaknya pengguna layanan");
+  const [personifikasi, setPersonifikasi] = useState("");
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function ChatInda() {
           id_chat: conversationId,
           selectedModel: selectedModel,
           name: name,
-          persona: personifikasi,
+          persona: personifikasi || "Dilayani dengan baik selayaknya pengguna layanan",
         }),
       });
 

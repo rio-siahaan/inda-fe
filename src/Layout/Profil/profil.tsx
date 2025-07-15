@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import avatar from "../../../public/avatar-2.jpg"
+import avatar from "../../../public/avatar-2.jpg";
 
 export default function ProfilLayout() {
   const { data: session, update } = useSession();
@@ -21,8 +21,8 @@ export default function ProfilLayout() {
   const gambar_user = session?.user?.image;
 
   useEffect(() => {
-    getProfile()
-  }, [])
+    getProfile();
+  }, []);
 
   useEffect(() => {
     nameRef.current?.focus();
@@ -30,18 +30,18 @@ export default function ProfilLayout() {
 
   const getProfile = async () => {
     try {
-      const profilUser = await fetch(`/api/getProfile?email=${email_user}`)
-      const {name, personifikasi} = await profilUser.json()
+      const profilUser = await fetch(`/api/getProfile?email=${email_user}`);
+      const { name, personifikasi } = await profilUser.json();
 
-      if (name && personifikasi){
-        setName(name)
-        setPersona(personifikasi)
+      if (name && personifikasi) {
+        setName(name);
+        setPersona(personifikasi);
       }
     } catch (error) {
-      console.log(error)
-      setError(true)
+      console.log(error);
+      setError(true);
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,12 +75,21 @@ export default function ProfilLayout() {
     <div className="w-full max-w-3xl mx-auto mt-10 px-4">
       <div className="flex items-center gap-6 mb-10">
         <div className="w-24 h-24 relative">
-          <Image
-            src={avatar}
-            alt="User avatar"
-            className="rounded-full object-cover"
-            fill
-          />
+          {gambar_user ? (
+            <Image
+              src={gambar_user}
+              alt="User avatar"
+              className="rounded-full object-cover"
+              fill
+            />
+          ) : (
+            <Image
+              src={avatar}
+              alt="User avatar"
+              className="rounded-full object-cover"
+              fill
+            />
+          )}
         </div>
         <h2 className="text-xl font-semibold text-gray-800">Profil Pengguna</h2>
       </div>

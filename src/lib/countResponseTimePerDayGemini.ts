@@ -25,7 +25,7 @@ export async function countResponseTimePerDayGemini() {
     const totalUsage = messagesToday.length;
 
     const totalResponse = messagesToday.reduce(
-      (sum, msg) => sum + (msg.responsetime ?? 0),
+      (sum, msg) => sum + (msg.responseTime ?? 0),
       0
     );
 

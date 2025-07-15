@@ -26,11 +26,11 @@ export async function countTokenPerDayLlama() {
     const totalUsage = messagesToday.length;
 
     const totalInput = messagesToday.reduce(
-      (sum, msg) => sum + (msg.inputtoken ?? 0),
+      (sum, msg) => sum + (msg.inputToken ?? 0),
       0
     );
     const totalOutput = messagesToday.reduce(
-      (sum, msg) => sum + (msg.outputtoken ?? 0),
+      (sum, msg) => sum + (msg.outputToken ?? 0),
       0
     );
 

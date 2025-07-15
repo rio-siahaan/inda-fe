@@ -17,7 +17,6 @@ export async function POST(req: Request) {
       email: email,
       password: hashedPassword,
       personifikasi: personifikasi,
-      image: null,
     },
   });
 

@@ -2,10 +2,10 @@ import { prisma } from "../../../../lib/prisma";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  // const body = await req.json();
-  // const userId = body.id;
+  const body = await req.json();
+  const userId = body.id;
 
-  const userId = req.nextUrl.searchParams.get("userId")
+  // const userId = req.nextUrl.searchParams.get("userId")
 
   if (!userId) {
     return new Response("Tidak mendapatkan userId di startOrGetConversation", {

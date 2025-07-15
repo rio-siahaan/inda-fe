@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import avatar from "../../../public/avatar-2.jpg";
 
 export default function ProfilLayout() {
-  const { data: session, update } = useSession();
+  const { data: session, update, status } = useSession();
   const [name, setName] = useState("");
   const [persona, setPersona] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,8 +21,8 @@ export default function ProfilLayout() {
   const gambar_user = session?.user?.image;
 
   useEffect(() => {
-    getProfile();
-  }, []);
+    if (email_user) getProfile();
+  }, [email_user]);
 
   useEffect(() => {
     nameRef.current?.focus();
@@ -32,11 +32,10 @@ export default function ProfilLayout() {
     try {
       const profilUser = await fetch(`/api/getProfile`, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email : email_user})
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email_user }),
       });
       const { name, personifikasi } = await profilUser.json();
-
       if (name && personifikasi) {
         setName(name);
         setPersona(personifikasi);
@@ -50,6 +49,8 @@ export default function ProfilLayout() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(false);
+    setSuccess(false);
     try {
       const res = await fetch("/api/profile", {
         method: "POST",
@@ -60,9 +61,12 @@ export default function ProfilLayout() {
           email: email_user,
         }),
       });
+
       router.refresh();
+
       if (!res.ok) {
         console.log("Status respons tidak ok karena ", res.status);
+        setError(true);
       } else {
         await update({ name, personifikasi: persona });
         setSuccess(true);
@@ -75,34 +79,29 @@ export default function ProfilLayout() {
     }
   };
 
-  return (
+  return status === "loading" ? (
+    <div className="w-full flex justify-center mt-20">
+      <LoadingOutlined className="text-2xl text-blue-500" />
+    </div>
+  ) : (
     <div className="w-full max-w-3xl mx-auto mt-10 px-4">
       <div className="flex items-center gap-6 mb-10">
         <div className="w-24 h-24 relative">
-          {gambar_user ? (
-            <Image
-              src={gambar_user}
-              alt="User avatar"
-              className="rounded-full object-cover"
-              fill
-            />
-          ) : (
-            <Image
-              src={avatar}
-              alt="User avatar"
-              className="rounded-full object-cover"
-              fill
-            />
-          )}
+          <Image
+            src={gambar_user || avatar}
+            alt="User avatar"
+            className="rounded-full object-cover"
+            fill
+          />
         </div>
-        <h2 className="text-xl font-semibold text-gray-800">Profil Pengguna</h2>
+        <h2 className="text-xl font-semibold text-gray-800">
+          Profil Pengguna
+        </h2>
       </div>
 
       {error && (
         <div className="bg-red-300 p-2 mb-2">
-          <p>
-            Terjadi kesalahan dalam mengubah profil Anda. Cobalah lain kali.
-          </p>
+          <p>Terjadi kesalahan dalam mengubah profil Anda. Cobalah lain kali.</p>
         </div>
       )}
       {success && (
@@ -110,6 +109,7 @@ export default function ProfilLayout() {
           <p>Sukses mengganti profil.</p>
         </div>
       )}
+
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="relative">
           <input
@@ -162,9 +162,10 @@ export default function ProfilLayout() {
             Personifikasi Anda
           </label>
         </div>
+
         <div className="flex gap-2 justify-end">
           <Link href="/">
-            <button className="button-orange p-2 cursor-pointer rounded-lg">
+            <button type="button" className="button-orange p-2 cursor-pointer rounded-lg">
               Kembali
             </button>
           </Link>

@@ -112,7 +112,6 @@ export default function Navbar() {
         </div>
 
         {/* Authenticated Dropdown */}
-        {}
         {status === "loading" ? (
           <div className="text-white">
             <LoadingOutlined />

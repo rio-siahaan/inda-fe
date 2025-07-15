@@ -72,6 +72,10 @@ export default function ChatInda() {
     e.preventDefault();
     console.log("Input sudah dikirim");
     if (!input.trim()) return;
+    if (!name || !personifikasi) {
+      alert("Profil pengguna belum siap, mohon tunggu sebentar...");
+      return;
+    }
 
     // const userMessage = {
     //   role: "user",
@@ -406,7 +410,7 @@ export default function ChatInda() {
                 ? "text-white bg-blue-600 hover:bg-blue-800"
                 : "text-dark hover:bg-gray-300"
             } hover:opacity-80 transition cursor-pointer`}
-            disabled={isLoading || !input.trim()}
+            disabled={isLoading || !input.trim() || !name || !personifikasi}
           >
             {isLoading ? (
               <LoadingOutlined />

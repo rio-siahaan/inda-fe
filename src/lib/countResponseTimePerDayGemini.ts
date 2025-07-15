@@ -18,7 +18,7 @@ export async function countResponseTimePerDayGemini() {
         },
       },
       select: {
-        responsetime: true
+        responseTime: true
       },
     });
 

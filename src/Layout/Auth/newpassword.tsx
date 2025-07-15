@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import emailConfirmation from "../../../public/email confirmation.png"
+import emailConfirmation from "../../../public/email confirmation.png";
 
 function FormComponent() {
   const params = useSearchParams();
@@ -15,10 +15,28 @@ function FormComponent() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const validatePassword = (password: string) => {
+    return (
+      password.length >= 5 &&
+      /[a-z]/.test(password) &&
+      /[A-Z]/.test(password)
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
+
     if (newPass !== confirmPass) {
       setError("Password tidak cocok!");
+      return;
+    }
+
+    if (!validatePassword(newPass)) {
+      setError(
+        "Password harus minimal 5 karakter dan mengandung huruf besar serta huruf kecil."
+      );
       return;
     }
 
@@ -36,7 +54,7 @@ function FormComponent() {
       }
 
       setSuccess("Password berhasil diubah!");
-      router.push("/login");
+      setTimeout(() => router.push("/login"), 1500); // redirect setelah 1.5s
     } catch (error) {
       setError(`Terjadi kesalahan ${error}.`);
     }
@@ -47,11 +65,14 @@ function FormComponent() {
       <aside className="w-1/3 flex-col justify-center items-start gap-10">
         <p className="font-bold">Ganti Password</p>
         <p className="text-red-500">
-          Harap masukkan kata sandi baru dan konfirmasi untuk menjaga keamanan akun Anda.
+          Harap masukkan kata sandi baru dan konfirmasi untuk menjaga keamanan
+          akun Anda.
         </p>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2 mt-5 justify-between">
-            <label className="font-medium" htmlFor="new_password">Password baru</label>
+            <label className="font-medium" htmlFor="new_password">
+              Password baru
+            </label>
             <input
               type="password"
               id="new_password"
@@ -61,7 +82,9 @@ function FormComponent() {
               onChange={(e) => setNewPass(e.target.value)}
             />
 
-            <label className="font-medium" htmlFor="confirm_new_password">Konfirmasi password baru</label>
+            <label className="font-medium" htmlFor="confirm_new_password">
+              Konfirmasi password baru
+            </label>
             <input
               type="password"
               id="confirm_new_password"
@@ -71,7 +94,12 @@ function FormComponent() {
               onChange={(e) => setConfirmPass(e.target.value)}
             />
 
-            <button type="submit" className="button-blue text-white rounded-lg">Ubah password</button>
+            <button
+              type="submit"
+              className="button-blue text-white rounded-lg"
+            >
+              Ubah password
+            </button>
           </div>
         </form>
         {error && <p className="text-red-600 mt-2">{error}</p>}

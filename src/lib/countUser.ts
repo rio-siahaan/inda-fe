@@ -18,7 +18,7 @@ export async function countUser() {
     const thisMonthUser = await prisma.user.findMany({
         where: {
             role: "user",
-            createdat: {
+            createdAt: {
                 gte: startThisMonth,
                 lte: now
             }

@@ -11,7 +11,7 @@ export async function countResponseTimePerDayGemini() {
 
     const messagesToday = await prisma.messages.findMany({
       where: {
-        selectedmodel: "gemini",
+        selectedModel: "gemini",
         created_at: {
           gte: todayStart,
           lte: todayEnd,

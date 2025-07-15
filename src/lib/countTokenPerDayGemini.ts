@@ -11,15 +11,15 @@ export async function countTokenPerDayGemini() {
 
     const messagesToday = await prisma.messages.findMany({
       where: {
-        selectedmodel: "gemini",
+        selectedModel: "gemini",
         created_at: {
           gte: todayStart,
           lte: todayEnd,
         },
       },
       select: {
-        inputtoken: true,
-        outputtoken: true,
+        inputToken: true,
+        outputToken: true,
       },
     });
 

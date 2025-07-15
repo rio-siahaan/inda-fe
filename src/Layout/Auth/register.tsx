@@ -74,8 +74,7 @@ export default function RegisterPage() {
 
   return (
     <section className="flex justify-center items-center min-h-screen bg-gray-100 p-5">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-md overflow-hidden">
-        {success && (
+      {success && (
           <p className="text-green-500 text-center text-sm mt-4">
             Register berhasil!
           </p>
@@ -83,7 +82,7 @@ export default function RegisterPage() {
         {error && (
           <p className="text-red-500 text-center text-sm mt-4">{error}</p>
         )}
-
+      <div className="w-full max-w-md bg-white rounded-xl shadow-md overflow-hidden">
         <div className="bg-dark-blue text-white text-center py-6 px-4 rounded-t-xl">
           <h2 className="text-xl font-bold mb-1">Ayo mendaftar!</h2>
           <p className="text-sm">Segera mendaftar untuk melihat keajaiban!</p>

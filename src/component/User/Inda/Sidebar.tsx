@@ -25,7 +25,7 @@ type SidebarIndaProps = {
 export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
   const { dark, setDark } = useDarkMode();
   const { data: session, update } = useSession();
-  const userId = session?.user?.id
+  const userId = session?.user?.id;
   const userName = session?.user?.name;
   const userEmail = session?.user?.email;
   const userImage = session?.user?.image;
@@ -75,6 +75,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
   useEffect(() => {
     const fetchPersonifikasi = async () => {
+      setLoading(true);
       if (!session?.user?.email) return;
 
       try {
@@ -88,10 +89,12 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
         }
       } catch (error) {
         console.error("Error fetch personifikasi:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-      fetchPersonifikasi();
+    fetchPersonifikasi();
   }, [showForm, session?.user?.email]);
 
   // const handleChangePersonification = async (e: React.FormEvent) => {
@@ -124,6 +127,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
   const handleAddSession = async () => {
     try {
+      setLoading(true);
       if (!userId) return;
       const res = await fetch("/api/chat/session/add", {
         method: "POST",
@@ -136,11 +140,13 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
       router.push(`/inda/${data.id}`);
       setSidebar(false);
     } finally {
+      setLoading(false);
     }
   };
 
   const handleRemoveSessionbyId = async (conversationId: string) => {
     try {
+      setLoading(true);
       if (!userId) return;
       const res = await fetch("/api/chat/session/removeById", {
         method: "POST",
@@ -153,11 +159,13 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
       router.push(`/inda/${data.newConversationId}`);
       setSidebar(false);
     } finally {
+      setLoading(false);
     }
   };
 
   const handleRemoveAll = async () => {
     try {
+      setLoading(true);
       if (!userId) return;
       const res = await fetch("/api/chat/session/removeAll", {
         method: "POST",
@@ -170,6 +178,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
       router.push(`/inda/${data.newConversationId}`);
       setSidebar(false);
     } finally {
+      setLoading(false);
     }
   };
 
@@ -196,9 +205,9 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
             <button
               className="cursor-pointer text-xl hover:bg-gray-500 p-1 rounded-lg"
               onClick={handleAddSession}
-              disabled={isLoading}
+              disabled={loading}
             >
-              {isLoading ? (
+              {loading ? (
                 <LoadingOutlined />
               ) : (
                 <EditOutlined title="Tambah percakapan" />
@@ -207,7 +216,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
           </div>
 
           <div className="mt-5 flex flex-col gap-2">
-            {isLoading ? (
+            {loading ? (
               <div className="h-[50px]">
                 <Loading />
               </div>
@@ -240,7 +249,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
         {/* Bottom Section */}
         <div className="flex gap-5">
           <div className="flex flex-col w-full">
-            {isLoading ? (
+            {loading ? (
               <div className="h-[20px]">
                 <Loading />
               </div>
@@ -248,7 +257,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
               <button
                 className="w-full cursor-pointer flex gap-3 items-center hover:bg-gray-500 p-2 rounded-lg mb-2"
                 onClick={handleRemoveAll}
-                disabled={isLoading}
+                disabled={loading}
               >
                 <RestOutlined />
                 <p className="text-xs">Hapus seluruh chat</p>
@@ -264,24 +273,19 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
             </button>
 
             <div className="hover:bg-gray-500 p-2 rounded-lg mb-2">
-              <button
-                className="flex gap-3 items-center cursor-pointer"
-              >
-                {userImage != null ? (
-                  <Image
-                    src={userImage || ""}
-                    alt="user"
-                    width={20}
-                    height={20}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <UserOutlined />
-                )}
-                <p className="text-xs">{userName}</p>
-              </button>
+              {userImage != null ? (
+                <Image
+                  src={userImage || ""}
+                  alt="user"
+                  width={20}
+                  height={20}
+                  className="rounded-full"
+                />
+              ) : (
+                <UserOutlined />
+              )}
+              <p className="text-xs">{userName}</p>
             </div>
-            
           </div>
         </div>
       </div>

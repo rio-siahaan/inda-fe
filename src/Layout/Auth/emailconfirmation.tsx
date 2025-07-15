@@ -33,7 +33,7 @@ export default function EmailConfirmationPage() {
     } catch (error) {
       setError(`Terjadi kesalahan karena ${error}.`);
     }finally{
-      setLoading(true)
+      setLoading(false)
     }
   };
 

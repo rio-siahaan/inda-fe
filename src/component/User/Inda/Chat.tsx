@@ -47,7 +47,11 @@ export default function ChatInda() {
       if (!session?.user?.email) return;
   
       try {
-        const res = await fetch(`/api/getProfile?email=${session.user.email}`);
+        const res = await fetch(`/api/getProfile`, {
+          method:'POST',
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({email: session?.user?.email})
+        });
         const data = await res.json();
   
         if (res.ok) {

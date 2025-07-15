@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
         session.user.role = typeof token.role === 'string' ? token.role || "user" : null;
       }
       if ("image" in token) {
-        session.user.image = (token.image as string) || "/avatar-2.jpg";
+        session.user.image = (token.image as string);
       }
       if ("personifikasi" in token) {
         // session.user.personifikasi = token.personifikasi;

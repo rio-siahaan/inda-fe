@@ -67,7 +67,11 @@ export default function Navbar() {
 
   const getRole = async () => {
     try {
-      const res = await fetch(`/api/getProfile?email=${session?.user?.email}`);
+      const res = await fetch(`/api/getProfile`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email: session?.user?.email})
+      });
       const { role } = await res.json();
       if (role) setUserRole(role);
     } catch (error) {

@@ -8,7 +8,6 @@ import {
   EditOutlined,
   LoadingOutlined,
   RestOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { useDarkMode } from "../../../lib/context/DarkModeContext";
 import { useSession } from "next-auth/react";
@@ -16,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations } from "../../../lib/hooks/useConversation";
 import Loading from "../../../component/Loading";
+import avatar from "../../../../public/avatar-2.jpg";
 
 type SidebarIndaProps = {
   sidebar: boolean;
@@ -79,9 +79,9 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
 
       try {
         const res = await fetch(`/api/getProfile`, {
-          method:'POST',
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({email: session?.user?.email})
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user?.email }),
         });
         const data = await res.json();
 
@@ -276,16 +276,22 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
             </button>
 
             <div className="hover:bg-gray-500 p-2 rounded-lg mb-2 flex gap-5">
-              {userImage && userImage.trim() !== "" ? (
+              {userImage ? (
                 <Image
-                  src={userImage || ""}
+                  src={userImage}
                   alt="user"
-                  width={20}
-                  height={20}
-                  className="rounded-full"
+                  width={30}
+                  height={30}
+                  className="rounded-full h-fit"
                 />
               ) : (
-                <UserOutlined />
+                <Image
+                  src={avatar}
+                  alt="user"
+                  width={30}
+                  height={30}
+                  className="rounded-full h-fit"
+                />
               )}
               <p className="text-xs">{userName}</p>
             </div>

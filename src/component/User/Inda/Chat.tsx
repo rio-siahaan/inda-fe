@@ -14,7 +14,7 @@ import { useParams } from "next/navigation";
 import Loading from "../../../component/Loading";
 import { useChatHistory } from "../../../lib/hooks/useChatHistory";
 import { useSession } from "next-auth/react";
-import avatar from "../../../../public/avatar-2.jpg"
+import avatar from "../../../../public/avatar-2.jpg";
 
 export default function ChatInda() {
   const { dark } = useDarkMode();
@@ -35,8 +35,8 @@ export default function ChatInda() {
   const params = useParams();
   const conversationId = params.conversationId as string;
   const { chat, isLoading, mutate } = useChatHistory(conversationId);
-  const [personifikasi, setPersonifikasi] = useState("")
-  const [name, setName] = useState("")
+  const [personifikasi, setPersonifikasi] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -45,18 +45,18 @@ export default function ChatInda() {
   useEffect(() => {
     const fetchUser = async () => {
       if (!session?.user?.email) return;
-  
+
       try {
         const res = await fetch(`/api/getProfile`, {
-          method:'POST',
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({email: session?.user?.email})
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: session?.user?.email }),
         });
         const data = await res.json();
-  
+
         if (res.ok) {
           setPersonifikasi(data.personifikasi || "");
-          setName(data.name || '')
+          setName(data.name || "");
         } else {
           console.error("Gagal ambil personifikasi:", data);
         }
@@ -64,7 +64,7 @@ export default function ChatInda() {
         console.error("Error fetch personifikasi:", error);
       }
     };
-    fetchUser()
+    fetchUser();
   }, [session?.user?.email]);
 
   //untuk ngirim ke fastapi
@@ -96,7 +96,7 @@ export default function ChatInda() {
           id_chat: conversationId,
           selectedModel: selectedModel,
           name: name,
-          persona: personifikasi
+          persona: personifikasi,
         }),
       });
 
@@ -266,16 +266,24 @@ export default function ChatInda() {
                     {chat.role === "bot" && (
                       <RobotOutlined className="text-2xl mt-1" />
                     )}
-                    {chat.role === "user" && (
-                      // <Image
-                      //   src={userImage || avatar}
-                      //   alt="user"
-                      //   width={30}
-                      //   height={30}
-                      //   className="rounded-full h-fit"
-                      // />
-                      <UserOutlined/>
-                    )}
+                    {chat.role === "user" &&
+                      (userImage ? (
+                        <Image
+                          src={userImage}
+                          alt="user"
+                          width={30}
+                          height={30}
+                          className="rounded-full h-fit"
+                        />
+                      ) : (
+                        <Image
+                          src={avatar}
+                          alt="user"
+                          width={30}
+                          height={30}
+                          className="rounded-full h-fit"
+                        />
+                      ))}
                     {isLoading ? (
                       <div className="h-50">
                         <Loading />
@@ -341,7 +349,7 @@ export default function ChatInda() {
                           : "bg-white text-gray-600"
                       } text-justify p-5 rounded-lg italic`}
                     >
-                      <Loading/>
+                      <Loading />
                     </div>
                   </div>
                 </div>

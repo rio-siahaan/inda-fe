@@ -132,7 +132,13 @@ export default function Navbar() {
                   className="rounded-full"
                 />
               ) : (
-                <UserOutlined />
+                <Image
+                  src={avatar || ""}
+                  alt="user"
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
               )}
               <p className="text-sm">Halo, {session.user?.name}</p>
             </button>

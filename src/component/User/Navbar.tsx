@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import avatar from "../../../public/avatar-2.jpg"
+import avatar from "../../../public/avatar-2.jpg";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -21,7 +21,8 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const [userRole, setUserRole] = useState()
+  const [userRole, setUserRole] = useState();
+  const userImage = session?.user?.image;
 
   //  buat responsif
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Navbar() {
     };
 
     handleResize();
-    if (session) getRole()
+    if (session) getRole();
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousedown", handleClickOutside);
@@ -67,12 +68,12 @@ export default function Navbar() {
   const getRole = async () => {
     try {
       const res = await fetch(`/api/getProfile?email=${session?.user?.email}`);
-      const {role} = await res.json()
-      if(role) setUserRole(role)
+      const { role } = await res.json();
+      if (role) setUserRole(role);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -118,13 +119,17 @@ export default function Navbar() {
               className="flex gap-2 items-center text-white cursor-pointer"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <Image
-                src={session.user?.image == '../../../public/avatar-2.jpg' ? avatar : session.user?.image || ""}
-                alt="user"
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
+              {userImage ? (
+                <Image
+                  src={userImage || ""}
+                  alt="user"
+                  width={24}
+                  height={24}
+                  className="rounded-full"
+                />
+              ) : (
+                <UserOutlined />
+              )}
               <p className="text-sm">Halo, {session.user?.name}</p>
             </button>
 

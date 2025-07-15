@@ -10,8 +10,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Email sudah digunakan" }, { status: 400 });
   }
 
-  const gambar = "../../../public/avatar-2.jpg"
-
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({
     data: {
@@ -19,7 +17,7 @@ export async function POST(req: Request) {
       email: email,
       password: hashedPassword,
       personifikasi: personifikasi,
-      image: gambar,
+      image: null,
     },
   });
 

@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const conversations = await prisma.conversations.findMany({
       where: {
-        userid: Number(userId),
+        userId: userId,
       },
       select: {
         id: true,
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     if (conversationIds.length > 0) {
       await prisma.messages.deleteMany({
         where: {
-          conversationid: {
+          conversationId: {
             in: conversationIds,
           },
         },

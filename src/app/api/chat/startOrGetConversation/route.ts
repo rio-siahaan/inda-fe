@@ -15,13 +15,13 @@ export async function GET(req: NextRequest) {
 
   try {
     let conversations = await prisma.conversations.findMany({
-      where: { userid: Number(userId) },
+      where: { userId: userId },
     });
 
     if (conversations.length === 0) {
       const newConversation = await prisma.conversations.create({
         data: {
-          userid: Number(userId),
+          userId: userId,
           title: `Percakapan ${new Date().toLocaleString()}`,
         },
       });

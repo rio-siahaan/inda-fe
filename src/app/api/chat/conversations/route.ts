@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const userId = req.nextUrl.searchParams.get("userId");
 
-  if (!userId || isNaN(Number(userId))) {
+  if (!userId) {
     return NextResponse.json(
       { error: "userId tidak valid di query param" },
       { status: 400 }
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const conversations = await prisma.conversations.findMany({
-      where: { userid: Number(userId) },
+      where: { userId: userId },
       select: {
         id: true,
         title: true,

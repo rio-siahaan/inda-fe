@@ -32,35 +32,35 @@ export async function POST(req: NextRequest) {
   // Simpan pesan dari user
   await prisma.messages.create({
     data: {
-      conversationid: Number(id_chat),
+      conversationId: id_chat,
       role: "user",
       message: response_text,
-      selectedmodel: selectedModel,
-      responsetime: 0,
-      inputtoken: usage_metadata?.input_tokens || 0,
-      outputtoken: 0,
+      selectedModel: selectedModel,
+      responseTime: 0,
+      inputToken: usage_metadata?.input_tokens || 0,
+      outputToken: 0,
     },
   })
   
   // Simpan pesan dari bot
   await prisma.messages.create({
     data: {
-      conversationid: Number(id_chat),
+      conversationId: id_chat,
       role: "bot",
       message: processed_text,
-      selectedmodel: selectedModel,
-      responsetime: responseTimeTrack,
-      inputtoken: 0,
-      outputtoken: usage_metadata?.output_tokens,
+      selectedModel: selectedModel,
+      responseTime: responseTimeTrack,
+      inputToken: 0,
+      outputToken: usage_metadata?.output_tokens,
     },
   })
 
   await prisma.usages.create({
     data: {
-      selectedmodel: selectedModel,
-      responsetime: responseTimeTrack,
-      inputtoken: usage_metadata?.input_tokens || 0,
-      outputtoken: usage_metadata?.output_tokens || 0,
+      selectedModel: selectedModel,
+      responseTime: responseTimeTrack,
+      inputToken: usage_metadata?.input_tokens || 0,
+      outputToken: usage_metadata?.output_tokens || 0,
     }
   })
 

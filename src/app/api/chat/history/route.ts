@@ -6,7 +6,7 @@ export async function GET(
 ) {
   const conversationId = req.nextUrl.searchParams.get("conversationId");
 
-  if (!conversationId || isNaN(Number(conversationId))) {
+  if (!conversationId) {
     return new Response(JSON.stringify({error : "conversationId tidak valid"}), {
       status : 400
     })
@@ -14,7 +14,7 @@ export async function GET(
 
   try {
     const logs = await prisma.messages.findMany({
-      where: { conversationid : Number(conversationId) },
+      where: { conversationId : conversationId },
       orderBy: { created_at: "asc" },
       select: {
         role: true,

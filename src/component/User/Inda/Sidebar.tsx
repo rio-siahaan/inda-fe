@@ -218,7 +218,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
             </button>
           </div>
 
-          <div className="mt-5 flex flex-col gap-2">
+          <div className="mt-5 flex flex-col gap-2 overflow-y-auto max-h-[300px] pr-1">
             {loading ? (
               <div className="h-[50px]">
                 <Loading />

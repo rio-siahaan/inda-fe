@@ -12,11 +12,11 @@ type NavbarType = {
 export default function NavbarInda({sidebar, setSidebar} : NavbarType){
   const {dark} = useDarkMode();
     return(
-        <nav className={`flex justify-between items-center ${dark ? 'bg-gray-700' : 'bg-white-2'} py-4 px-6`}>
+        <nav className={`flex justify-between items-center ${dark ? 'bg-gray-700' : 'bg-gray-200'} py-4 px-6`}>
           <div className="flex gap-5">
             <button
               onClick={() => setSidebar(!sidebar)}
-              className="cursor-pointer md:hidden"
+              className="cursor-pointer"
             >
               {sidebar ? (
                 <AppstoreOutlined className="" />

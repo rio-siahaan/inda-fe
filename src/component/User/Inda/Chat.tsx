@@ -14,7 +14,6 @@ import Loading from "../../../component/Loading";
 import { useChatHistory } from "../../../lib/hooks/useChatHistory";
 import { useSession } from "next-auth/react";
 import avatar from "../../../../public/avatar-2.jpg";
-import logoBps from "../../../../public/bps.svg";
 
 export default function ChatInda() {
   const { dark } = useDarkMode();
@@ -37,6 +36,7 @@ export default function ChatInda() {
   const { chat, isLoading, mutate } = useChatHistory(conversationId);
   const [personifikasi, setPersonifikasi] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -70,6 +70,7 @@ export default function ChatInda() {
   //untuk ngirim ke fastapi
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true)
     console.log("Input sudah dikirim");
     if (!input.trim()) return;
     if (!name) {
@@ -176,6 +177,7 @@ export default function ChatInda() {
       ]);
     } finally {
       setInput("");
+      setLoading(false)
     }
   };
 
@@ -308,9 +310,9 @@ export default function ChatInda() {
                         <div
                           className={`${
                             chat.role === "user"
-                              ? "bg-blue-200 dark:bg-blue-800 text-black dark:text-white"
-                              : "bg-transparent text-gray-800 dark:text-white"
-                          } text-justify p-2 rounded-lg shadow`}
+                              ? `${dark ? 'bg-gray-600 text-white': 'bg-white-2 text-black'}`
+                              : `${dark ? 'text-white' : 'text-black'} bg-transparent`
+                          } text-justify p-2 rounded-lg shadow-lg`}
                         >
                           <ReactMarkdown
                             components={{
@@ -379,7 +381,7 @@ export default function ChatInda() {
 
       <form
         onSubmit={handleSubmit}
-        className={`w-full px-4 py-3 ${dark ? "bg-gray-500" : "bg-gray-200"}`}
+        className={`w-full px-4 py-3 ${dark ? "bg-gray-700" : "bg-gray-200"}`}
       >
         <div className="max-w-3xl mx-auto flex items-end gap-3 relative">
           <div className="flex-1 relative">
@@ -395,7 +397,7 @@ export default function ChatInda() {
               }`}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              disabled={isLoading}
+              disabled={loading}
             />
             <label
               htmlFor="input"
@@ -415,9 +417,9 @@ export default function ChatInda() {
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:opacity-80 cursor-pointer"
             }`}
-            disabled={isLoading || !input.trim() || !name}
+            disabled={loading || !input.trim() || !name}
           >
-            {isLoading ? (
+            {loading ? (
               <LoadingOutlined />
             ) : (
               <SendOutlined style={{ fontSize: 20 }} />

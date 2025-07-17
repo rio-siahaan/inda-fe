@@ -260,7 +260,7 @@ export default function SidebarInda({ sidebar, setSidebar }: SidebarIndaProps) {
               </div>
             ) : (
               <button
-                className="w-full cursor-pointer flex gap-3 items-center hover:bg-gray-500 p-2 rounded-lg mb-2"
+                className="w-full cursor-pointer flex gap-3 items-center hover:bg-gray-500 p-2 rounded-lg mb-2 text-left"
                 onClick={handleRemoveAll}
                 disabled={loading}
               >

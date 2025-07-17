@@ -19,14 +19,14 @@ export default function NavbarInda({sidebar, setSidebar} : NavbarType){
               className="cursor-pointer"
             >
               {sidebar ? (
-                <AppstoreOutlined className="" />
+                <AppstoreOutlined className={`${dark ? 'text-white' : 'text-black'}`} />
               ) : (
-                <DoubleRightOutlined className="" />
+                <DoubleRightOutlined className={`${dark ? 'text-white' : 'text-black'}`} />
               )}
             </button>
           </div>
           <button onClick={() => (
-            signOut({callbackUrl: `/login`}))} className="flex justify-center items-center gap-2 cursor-pointer">
+            signOut({callbackUrl: `/login`}))} className={`${dark ? 'text-white' : 'text-black'} flex justify-center items-center gap-2 cursor-pointer`}>
             <LogoutOutlined style={{ fontSize: "20px" }} />
           </button>
         </nav>

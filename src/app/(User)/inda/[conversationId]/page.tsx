@@ -14,7 +14,7 @@ export default function IndaChat() {
   const {dark} = useDarkMode()
 
   return (
-    <div className={`min-h-screen ${(dark) ? 'bg-dark-blue text-white' : 'bg-white-2 text-black'} flex`}>
+    <div className={`flex`}>
       <SidebarInda sidebar={sidebar} setSidebar={setSidebar}/>
 
       <div className="flex flex-col h-screen w-full">

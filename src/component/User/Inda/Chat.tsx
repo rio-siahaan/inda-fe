@@ -14,6 +14,7 @@ import Loading from "../../../component/Loading";
 import { useChatHistory } from "../../../lib/hooks/useChatHistory";
 import { useSession } from "next-auth/react";
 import avatar from "../../../../public/avatar-2.jpg";
+import logoBps from "../../../../public/bps.svg";
 
 export default function ChatInda() {
   const { dark } = useDarkMode();
@@ -99,7 +100,8 @@ export default function ChatInda() {
           id_chat: conversationId,
           selectedModel: selectedModel,
           name: name,
-          persona: personifikasi || "Dilayani dengan baik selayaknya pengguna layanan",
+          persona:
+            personifikasi || "Dilayani dengan baik selayaknya pengguna layanan",
         }),
       });
 
@@ -237,7 +239,7 @@ export default function ChatInda() {
     <>
       <div
         className={`flex-1 overflow-y-auto px-6 py-4 ${
-          dark ? "bg-gray-500" : "bg-gray-200"
+          dark ? "bg-gray-700" : "bg-gray-200"
         }`}
       >
         {isLoading ? (
@@ -270,15 +272,15 @@ export default function ChatInda() {
                   } mb-5`}
                 >
                   <div
-                    className={`max-w-[70%] flex items-start gap-3 ${
+                    className={`flex items-start gap-3 ${
                       chat.role === "user"
                         ? "flex-row-reverse ml-auto"
                         : "mr-auto"
                     }`}
                   >
-                    {chat.role === "bot" && (
-                      <RobotOutlined className="text-2xl mt-1" />
-                    )}
+                    {/* {chat.role === "bot" && (
+                      <Image src={logoBps} alt = "bps" width={30} height={30} className="rounded-full h-fit"/>
+                    )} */}
                     {chat.role === "user" &&
                       (userImage ? (
                         <Image
@@ -305,10 +307,10 @@ export default function ChatInda() {
                       <div>
                         <div
                           className={`${
-                            dark
-                              ? "bg-gray-800 text-white"
-                              : "bg-white text-gray-800"
-                          }  text-justify p-5 rounded-lg shadow flex-col`}
+                            chat.role === "user"
+                              ? "bg-blue-200 dark:bg-blue-800 text-black dark:text-white"
+                              : "bg-transparent text-gray-800 dark:text-white"
+                          } text-justify p-2 rounded-lg shadow`}
                         >
                           <ReactMarkdown
                             components={{

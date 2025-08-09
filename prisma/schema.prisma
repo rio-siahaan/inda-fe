@@ -15,7 +15,7 @@ model User {
     personifikasi   String?
     emailVerified   DateTime?
     image           String?
-    role            String @default("user")
+    role            String @default("admin")
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
 

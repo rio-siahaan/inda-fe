@@ -23,6 +23,7 @@ export default function TabelData() {
       try {
         const res = await fetch("/api/admin/listJson");
         const data = await res.json();
+        console.log("Ini adalah data dari tabel data: ", data)
         setFiles(data.files || data || []);
       } catch (error) {
         console.error("Gagal fetch data file JSON", error);

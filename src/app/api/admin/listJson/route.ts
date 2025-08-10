@@ -3,11 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const listCsv = await ListFile()
-
-    return NextResponse.json({files: listCsv})
+    const listCsv = await ListFile();
+    return NextResponse.json({ files: listCsv });
   } catch (error) {
-    console.log(error)
-    return NextResponse.json({status: 500})
+    console.error(error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Terjadi kesalahan" },
+      { status: 500 }
+    );
   }
 }

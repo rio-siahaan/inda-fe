@@ -12,6 +12,8 @@ export async function ListFile() {
       },
     });
 
+    console.log("Hasil query dari prisma: ", listCsv)
+
     return {listCsv: listCsv}
   } catch (error) {
     console.error("Gagal mengambil file knowledge karena ", error)

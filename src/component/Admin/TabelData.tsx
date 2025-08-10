@@ -14,12 +14,16 @@ export default function TabelData() {
   const [files, setFiles] = useState<FileInfo[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage] = useState(5); // default 10 baris per halaman
+
   useEffect(() => {
     async function fetchFiles() {
       try {
         const res = await fetch("/api/admin/listJson");
         const data = await res.json();
-        setFiles(data.files || []);
+        setFiles(data.files || data || []);
       } catch (error) {
         console.error("Gagal fetch data file JSON", error);
         setFiles([]);
@@ -29,6 +33,21 @@ export default function TabelData() {
     }
     fetchFiles();
   }, []);
+
+  // Format ke Bulan Tahun (misal: "Agustus 2025")
+  const formatBulanTahun = (isoString: string) => {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    return date.toLocaleDateString("id-ID", { month: "long", year: "numeric" });
+  };
+
+  // Hitung index data untuk pagination
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = files.slice(indexOfFirstRow, indexOfLastRow);
+
+  // Total halaman
+  const totalPages = Math.ceil(files.length / rowsPerPage);
 
   return (
     <div className="w-full">
@@ -52,16 +71,10 @@ export default function TabelData() {
                   <table className="min-w-full divide-y divide-gray-200 table-fixed">
                     <thead>
                       <tr>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
-                        >
+                        <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                           NAMA
                         </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
-                        >
+                        <th className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
                           TANGGAL MASUK
                         </th>
                       </tr>
@@ -77,11 +90,11 @@ export default function TabelData() {
                             />
                           </td>
                         </tr>
-                      ) : files.length > 0 ? (
-                        files.map((item) => (
-                          <tr key={item.name}>
+                      ) : currentRows.length > 0 ? (
+                        currentRows.map((item, idx) => (
+                          <tr key={idx}>
                             <td
-                              className={`align-top px-6 py-4 text-sm font-medium text-gray-800 ${
+                              className={`align-top px-6 py-4 text-sm font-medium ${
                                 dark ? "text-white" : "text-black"
                               }`}
                             >
@@ -92,13 +105,12 @@ export default function TabelData() {
                                 {item.name}
                               </div>
                             </td>
-
                             <td
-                              className={`px-6 py-4 whitespace-nowrap text-sm text-gray-800 align-top ${
+                              className={`px-6 py-4 whitespace-nowrap text-sm align-top ${
                                 dark ? "text-white" : "text-black"
                               }`}
                             >
-                              {item.created_at}
+                              {formatBulanTahun(item.created_at)}
                             </td>
                           </tr>
                         ))
@@ -108,7 +120,7 @@ export default function TabelData() {
                             colSpan={2}
                             className={`${
                               dark ? "text-white" : "text-black"
-                            } align-top px-6 py-4 text-sm font-medium text-gray-800`}
+                            } align-top px-6 py-4 text-sm font-medium`}
                           >
                             Tidak ada data yang diambil
                           </td>
@@ -116,6 +128,33 @@ export default function TabelData() {
                       )}
                     </tbody>
                   </table>
+
+                  {/* Pagination */}
+                  <div className="flex justify-center items-center mt-4 gap-2">
+                    <button
+                      onClick={() =>
+                        setCurrentPage((prev) => Math.max(prev - 1, 1))
+                      }
+                      disabled={currentPage === 1}
+                      className="px-3 py-1 border rounded disabled:opacity-50"
+                    >
+                      Prev
+                    </button>
+                    <span>
+                      Halaman {currentPage} dari {totalPages}
+                    </span>
+                    <button
+                      onClick={() =>
+                        setCurrentPage((prev) =>
+                          Math.min(prev + 1, totalPages)
+                        )
+                      }
+                      disabled={currentPage === totalPages}
+                      className="px-3 py-1 border rounded disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

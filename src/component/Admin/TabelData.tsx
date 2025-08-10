@@ -16,7 +16,7 @@ export default function TabelData() {
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(5); // default 10 baris per halaman
+  const [rowsPerPage] = useState(5); 
 
   useEffect(() => {
     async function fetchFiles() {

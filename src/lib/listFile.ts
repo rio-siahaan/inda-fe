@@ -15,9 +15,7 @@ export async function ListFile() {
 
     return listCsv
   } catch (error) {
-    return NextResponse.json(
-        {error: `Gagal mencari daftar file karena ${error}`},
-        {status: 500}
-    )
+    console.error("Gagal mengambil file knowledge")
+    return []
   }
 }

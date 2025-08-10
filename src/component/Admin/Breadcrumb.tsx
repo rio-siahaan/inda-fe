@@ -13,10 +13,8 @@ export default function Breadcrumb() {
       <div className={`font-bold ${dark ? "text-white" : "text-black"}`}>
         {path === "/dashboard"
           ? "Dashboard"
-          : path === "/neweditfail"
-          ? "Edit fail"
-          : path === "/editmodel"
-          ? "Edit model"
+          : path === "/editfail"
+          ? "Edit dokumen"
           : ""}
       </div>
       <div className="flex gap-5 items-center">
@@ -30,10 +28,8 @@ export default function Breadcrumb() {
         <p className={`text-sm ${dark ? "text-gray-200" : "text-gray-500"}`}>
           {path === "/dashboard"
             ? "Dashboard"
-            : path === "/neweditfail"
-            ? "Edit fail"
-            : path === "/editmodel"
-            ? "Edit model"
+            : path === "/editfail"
+            ? "Edit dokumen"
             : ""}
         </p>
       </div>

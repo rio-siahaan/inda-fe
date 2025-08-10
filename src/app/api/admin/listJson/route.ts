@@ -4,7 +4,15 @@ import { NextResponse } from "next/server";
 export async function POST() {
   try {
     const {listCsv} = await ListFile();
-    return NextResponse.json({ files: listCsv });
+    return new Response(
+      JSON.stringify({
+        files: listCsv,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error) {
     console.error(error);
     return NextResponse.json(

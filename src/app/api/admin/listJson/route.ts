@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const listCsv = await ListFile()
 
-    if (listCsv.ok) return listCsv
+    return NextResponse.json(listCsv)
   } catch (error) {
     console.log(error)
     return NextResponse.json({status: 500})

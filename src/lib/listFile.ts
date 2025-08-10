@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { prisma } from "./prisma";
 
 export async function ListFile() {
@@ -15,7 +14,7 @@ export async function ListFile() {
 
     return listCsv
   } catch (error) {
-    console.error("Gagal mengambil file knowledge")
+    console.error("Gagal mengambil file knowledge karena ", error)
     return []
   }
 }

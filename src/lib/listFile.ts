@@ -12,9 +12,9 @@ export async function ListFile() {
       },
     });
 
-    return listCsv
+    return {listCsv: listCsv}
   } catch (error) {
     console.error("Gagal mengambil file knowledge karena ", error)
-    return []
+    return {listCsv: []}
   }
 }

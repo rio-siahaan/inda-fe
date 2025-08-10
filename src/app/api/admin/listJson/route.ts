@@ -1,9 +1,9 @@
 import { ListFile } from "../../../../lib/listFile";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST() {
   try {
-    const listCsv = await ListFile();
+    const {listCsv} = await ListFile();
     return NextResponse.json({ files: listCsv });
   } catch (error) {
     console.error(error);

@@ -13,7 +13,7 @@ export async function ListFile() {
       },
     });
 
-    return NextResponse.json(listCsv)
+    return listCsv
   } catch (error) {
     return NextResponse.json(
         {error: `Gagal mencari daftar file karena ${error}`},

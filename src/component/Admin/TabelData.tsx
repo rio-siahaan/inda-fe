@@ -25,7 +25,7 @@ export default function TabelData() {
           method: "POST"
         });
         const data = await res.json();
-        console.log("Ini adalah data dari tabel data: ", data)
+        // console.log("Ini adalah data dari tabel data: ", data)
         setFiles(data.files || data || []);
       } catch (error) {
         console.error("Gagal fetch data file JSON", error);
